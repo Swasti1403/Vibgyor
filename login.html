@@ -13,30 +13,33 @@
     <body>
         <div class="container-fluid" style="height: 100%;">
             <div class="row" style="height: 100%;">
-                <div class="col-lg-8" style="background-color: blue;">
+                <div class="col-lg-8" style="background-color: #d5ecc2;">
                     <!-- img -->
                         A
                 </div>
-                <div class="col-lg-4 text-center" style="background-color:lightgrey;padding-top:15%;">
+                <div class="col-lg-4 text-center" style="background-color:  #98ddca;padding-top:15%;"> 
+                    <!-- #51c4d3 -->
                     <div class="input-element-heading">
                         <h3>Sign In</h3>
                     </div>
                     <hr>
-                    <div class="m-3">
-                        <div class="input-element-heading">
-                            <div><label for ="email">Email</label></div>
+                    <form action="/login" method="post">
+                        <div class="m-3">
+                            <div class="input-element-heading">
+                                <div><label for ="email">Email</label></div>
+                            </div>
+                            <input class="input-element" placeholder="abc@example.com" type="email" name="email" id="email">
                         </div>
-                        <input class="input-element"  placeholder="abc@example.com" type="email" name="" id="email">
-                    </div>
-                    <div class="m-3">
-                        <div class="input-element-heading">
-                            <div><label for ="password">Password</label></div>
+                        <div class="m-3">
+                            <div class="input-element-heading">
+                                <div><label for ="password">Password</label></div>
+                            </div>
+                            <input class="input-element" placeholder="Minimum 6 characters" type="password" name="password" id="password">
                         </div>
-                        <input class="input-element" placeholder="Minimum 6 characters" type="password" name="" id="password">
-                    </div>
-                    <div class="text-center">
-                    <button class="btn btn-primary m-3">Login</button>
-                    </div>
+                        <div class="text-center">
+                            <button class="btn btn-success m-3" type="submit">Login</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

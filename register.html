@@ -13,50 +13,52 @@
     <body>
             <div class="container-fluid" style="height: 100%;">
                 <div class="row" style="height: 100%;">
-                    <div class="col-lg-8" style="background-color: green;">
+                    <div class="col-lg-8" style="background-color:#bbf1fa;">
                         <!-- img -->
                             A
                     </div>
-                    <div class="col-lg-4 text-center" style="background-color:yellow; padding-top:5%">
+                    <div class="col-lg-4 text-center" style="background-color:#51c4d3; padding-top:5%">
                         
                         <div class="input-element-heading">
                             <h3>New User</h3>
                         </div>
                         <hr>
-                        <div class="m-4" >
-                            <div class="input-element-heading">
-                                <div><label for ="User_name">User Name</label></div>
+                        <form action="/register" method="post">
+                            <div class="m-4" >
+                                <div class="input-element-heading">
+                                    <div><label for ="User_name">User Name</label></div>
+                                </div>
+                                <input class="input-element"  placeholder="John Doe" type="text" name="name" id="User_name">
+                                
                             </div>
-                            <input class="input-element"  placeholder="John Doe" type="text" name="" id="User_name">
-                            
-                        </div>
-                        <div class="m-4" >
-                            <div class="input-element-heading">
-                                <div><label for ="email">Email</label></div>
+                            <div class="m-4" >
+                                <div class="input-element-heading">
+                                    <div><label for ="email">Email</label></div>
+                                </div>
+                                <input class="input-element"  placeholder="abc@example.com" type="email" name="email" id="email">
                             </div>
-                            <input class="input-element"  placeholder="abc@example.com" type="email" name="" id="email">
-                        </div>
-                        <div class="m-4" >
-                            <div class="input-element-heading">
-                                <div><label for="contact">Contact Number</label></div>
+                            <div class="m-4" >
+                                <div class="input-element-heading">
+                                    <div><label for="contact">Contact Number</label></div>
+                                </div>
+                                <input class="input-element" placeholder="9876543210" type="tel" name="id" id="contact">
                             </div>
-                            <input class="input-element" placeholder="9876543210" type="tel" name="" id="contact">
-                        </div>
-                        <div class="m-4">
-                            <div class="input-element-heading">
-                                <div><label for ="password">Password</label></div>
+                            <div class="m-4">
+                                <div class="input-element-heading">
+                                    <div><label for ="password">Password</label></div>
+                                </div>
+                                <input class="input-element" placeholder="Minimum 6 characters" type="password" name="password" id="password">
                             </div>
-                            <input class="input-element" placeholder="Minimum 6 characters" type="password" name="" id="password">
-                        </div>
-                        <div class="m-4">
-                            <div class="input-element-heading">
-                                <div><label for ="confirm_password">Confirm Password</label></div>
+                            <div class="m-4">
+                                <div class="input-element-heading">
+                                    <div><label for ="confirm_password">Confirm Password</label></div>
+                                </div>
+                                <input class="input-element" placeholder="Re-enter your password" type="password" name="confirm_password" id="confirm_password">
                             </div>
-                            <input class="input-element" placeholder="Re-enter your password" type="password" name="" id="confirm_password">
-                        </div>
-                        <div class="text-center">
-                            <button class="btn btn-primary btn-md">Register</button>
-                        </div>
+                            <div class="text-center">
+                                <button class="btn btn-primary btn-md" type="submit">Register</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>        
