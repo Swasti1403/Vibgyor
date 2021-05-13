@@ -4,11 +4,21 @@ const request = require("request");
 const https = require("https");
 const app = express();
 
+app.set('view engine', 'ejs');
+
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/",function(req,res){
-    res.sendFile(__dirname +"/index.html");
+    res.render(__dirname +"/index");
+});
+
+app.get("/past-performance",function(req,res){
+    res.render(__dirname +"/past-performance");
+});
+
+app.get("/test",function(req,res){
+    res.render(__dirname +"/test");
 });
 
 app.get("/login",function(req,res){
