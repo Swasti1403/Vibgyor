@@ -1,7 +1,33 @@
 <%- include("./views/header") -%>
 <main>
     <div id="test">
-        <span>{{min_left}}:{{sec_left}}</span>
+        <div>
+            <div>Test Name -> {{test_name}}</div>
+            <div>Total Time -> {{test_time}}</div>
+            <div>Total Questions -> {{total_questions}}</div>
+        </div>
+        <div v-if="!test_started">
+            <button @click="startTest">Start Test</button>
+        </div>
+        <div v-if="test_started && !time_up">
+            <div>{{min_left}}:{{sec_left}}</div>
+            <div>Question Number {{current_question+1}}: {{questions[current_question]}}</div>
+            <input type="radio" id="option1" :name="current_question" :value="options[current_question].a">
+            <label for="option1">{{options[current_question].a}}</label><br>
+            <input type="radio" id="option2" :name="current_question" :value="options[current_question].b">
+            <label for="option2">{{options[current_question].b}}</label><br>
+            <input type="radio" id="option3" :name="current_question" :value="options[current_question].c">
+            <label for="option3">{{options[current_question].c}}</label><br>
+            <input type="radio" id="option4" :name="current_question" :value="options[current_question].d">
+            <label for="option4">{{options[current_question].d}}</label>
+            <div>
+                <button @click="prevQuestion">Prev Question</button>
+                <button @click="nextQuestion">Next Question</button>
+            </div>
+        </div>
+        <div v-if="time_up">
+            Time Over! Thanks for attempting out test :P 
+        </div>
     </div>
     
 </main>
