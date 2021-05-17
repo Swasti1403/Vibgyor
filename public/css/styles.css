@@ -10497,7 +10497,7 @@ input[type=text]:placeholder, input[type=password]:placeholder, input[type=tel]:
 
 
 /*practice*/
-
+/* 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 * {
@@ -10507,7 +10507,7 @@ input[type=text]:placeholder, input[type=password]:placeholder, input[type=tel]:
 }
 
 body {
-    background-color: #333
+    background-color: white
 }
 
 .container {
@@ -10602,7 +10602,7 @@ body {
         width: 100%;
         word-spacing: 2px
     }
-}
+} */
 
 
 
