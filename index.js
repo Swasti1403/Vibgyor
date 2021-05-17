@@ -22,7 +22,10 @@ app.get("/test",function(req,res){
 });
 
 app.get("/login",function(req,res){
-    res.sendFile(__dirname +"/login.html");
+    res.render(__dirname +"/login");
+});
+app.get("/practice",function(req,res){
+    res.render(__dirname +"/practice");
 });
 
 app.post("/login",function(req,res){
@@ -31,7 +34,7 @@ app.post("/login",function(req,res){
 });
 
 app.get("/register",function(req,res){
-    res.sendFile(__dirname +"/register.html");
+    res.render(__dirname +"/register");
 });
 
 app.post("/register",function(req,res){
@@ -40,7 +43,7 @@ app.post("/register",function(req,res){
 });
 
 app.get("/forgetPassword",function(req,res){
-    res.sendFile(__dirname +"/forget-password.html");
+    res.render(__dirname +"/forget-password");
 });
 
 app.post("/forgetPassword",function(req,res){

@@ -1,14 +1,22 @@
 <%- include("./views/header") -%>
 <main>
     <div id="test">
-        <div>
-            <div>Test Name -> {{test_name}}</div>
-            <div>Total Time -> {{test_time}}</div>
-            <div>Total Questions -> {{total_questions}}</div>
-        </div>
-        <div v-if="!test_started">
-            <button @click="startTest">Start Test</button>
-        </div>
+        <div class="container">
+            <img src="./assets/img/blacboard.jpg" style="height: 100%;width: 100%;background-size: cover;" alt="Norway" >
+            <div class="text-block">
+                <div>
+                    <div>Test Name -> {{test_name}}</div>
+                    <div>Total Time -> {{test_time}}</div>
+                    <div>Total Questions -> {{total_questions}}</div>
+                </div>
+                <div v-if="!test_started">
+                    <button @click="startTest">Start Test</button>
+                </div>
+            </div>
+          </div>
+        
+  
+        
         <div v-if="test_started && !time_up">
             <div>{{min_left}}:{{sec_left}}</div>
             <div>Question Number {{current_question+1}}: {{questions[current_question]}}</div>

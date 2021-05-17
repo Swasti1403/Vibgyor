@@ -1,0 +1,25 @@
+<%- include("./views/auth-header") -%>
+<!-- Registration Form -->
+<form>
+<div class="text-center pt-4">
+    <h1><i class="fas fa-user-plus"></i></h1>
+    <h2>Sign Up</h2>
+    <hr style = "width: 50%; height:2px; background-color: #56baed;">
+</div>	
+<input type="text" id="name" name="name" placeholder="Name">
+<input type="text" id="email" name="email" placeholder="Email">
+<input type="tel" id="contact" name="contact" placeholder="Mobile">
+<input type="password" id="password"  name="password" placeholder="Password">
+<input type="password" id="confirm_password"  name="confirm_password" placeholder="Confirm Password">
+<input class="mt-4" type="submit"  value="Log In">
+</form>
+
+<!-- Remind Passowrd -->
+<div id="formFooter">
+    <div class="text-center">
+    <a class="underlineHover" href="/login">Already A User?</a>
+    </div>
+</div>
+      
+<%- include("./views/auth-footer") -%>
+
