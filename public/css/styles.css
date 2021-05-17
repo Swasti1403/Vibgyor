@@ -10486,14 +10486,34 @@ input[type=text]:placeholder, input[type=password]:placeholder, input[type=tel]:
 .text-block {
   background-size: cover;
   position: absolute;
-  bottom: 200px;
-  left: 500px;
   background-color: black;
   color: white;
-  padding-left: 20px;
-  padding-right: 20px;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  /* height: 350px; */
 }
 
+main, html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("../assets/img/blacboard.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 
 /*practice*/
