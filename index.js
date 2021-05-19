@@ -17,6 +17,10 @@ app.get("/past-performance",function(req,res){
     res.render(__dirname +"/past-performance");
 });
 
+app.get("/all-packages",function(req,res){
+    res.render(__dirname +"/all-packages");
+});
+
 app.get("/test",function(req,res){
     res.render(__dirname +"/test");
 });
@@ -26,6 +30,13 @@ app.get("/login",function(req,res){
 });
 app.get("/practice",function(req,res){
     res.render(__dirname +"/practice");
+});
+
+app.get("/layout-static",function(req,res){
+    res.render(__dirname +"/layout-static");
+});
+app.get("/front-page",function(req,res){
+    res.render(__dirname +"/front-page")
 });
 
 app.post("/login",function(req,res){
