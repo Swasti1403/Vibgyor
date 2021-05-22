@@ -28,10 +28,14 @@ app.get("/test",function(req,res){
 app.get("/login",function(req,res){
     res.render(__dirname +"/login");
 });
+
 app.get("/practice",function(req,res){
     res.render(__dirname +"/practice");
 });
 
+app.get("/imge",function(req,res){
+    res.render(__dirname +"/imge");
+});
 app.get("/layout-static",function(req,res){
     res.render(__dirname +"/layout-static");
 });

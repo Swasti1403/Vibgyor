@@ -576,6 +576,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  
 }
 
 .no-gutters {
@@ -10007,8 +10008,8 @@ h3 {
   }
 }
 .features-icons {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 .features-icons .features-icons-item {
   max-width: 20rem;
@@ -10026,7 +10027,7 @@ h3 {
 header.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("../assets/img/newbg.jpg") no-repeat center center;
+  background: url("../assets/img/blue-bg.jpg") no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -10057,8 +10058,10 @@ header.masthead h1 {
   padding: 3rem;
 }
 .showcase .showcase-img {
-  min-height: 30rem;
+  min-height: 20rem;
   background-size: cover;
+  
+  
 }
 @media (min-width: 768px) {
   .showcase .showcase-text {
@@ -10067,8 +10070,8 @@ header.masthead h1 {
 }
 
 .testimonials {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 .testimonials .testimonial-item {
   max-width: 18rem;
@@ -10083,8 +10086,8 @@ header.masthead h1 {
   background-color: #343a40;
   background: url("../assets/img/blue-bg.jpg") no-repeat center center;
   background-size: cover;
-  padding-top: 7rem;
-  padding-bottom: 7rem;
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
 }
 .call-to-action .overlay {
   position: absolute;
@@ -10097,6 +10100,6 @@ header.masthead h1 {
 }
 
 footer.footer {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
