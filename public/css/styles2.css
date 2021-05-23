@@ -10024,7 +10024,7 @@ h3 {
   font-size: 5rem;
 }
 
-header.masthead {
+/* header.masthead {
   position: relative;
   background-color: #343a40;
   background: url("../assets/img/blue-bg.jpg") no-repeat center center;
@@ -10046,13 +10046,13 @@ header.masthead h1 {
 }
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
   }
   header.masthead h1 {
-    font-size: 3rem;
+    font-size: 5rem;
   }
-}
+} */
 
 .showcase .showcase-text {
   padding: 3rem;
@@ -10103,3 +10103,86 @@ footer.footer {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+
+/* features */
+#features {
+  padding: 3% 12%;
+}
+
+.feature-box{
+  text-align: center;
+  padding: 1%;
+  font-family: "Montserrat-black";
+  
+}
+
+.icon {
+  width: 80%;
+  
+}
+
+.card {
+  background-color: blue;
+}
+
+.icon:hover{
+  width:100%;
+}
+
+@media (min-width: 768px) {
+  .card-img-top {
+    width: 60%;
+    height: 15vw;
+    object-fit: cover;
+    margin: 5% 19%;
+  }
+
+}
+
+
+
+/* testimonials */
+
+#testimonials {
+  text-align: center;
+  background-color: whitesmoke;
+  color: #0056b3;
+}
+
+.testimonial-image{
+  width: 50%;
+  height: 50%;
+  border-radius: 100%;
+  margin: 1%;
+}
+
+.carousel-item{
+  padding: 7% 15%;
+
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 100px;
+  width: 100px;
+  outline: black;
+  background-size: 100%, 100%;
+  background-image: none;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 200%;
+  color: black ;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 200%;
+  color: black;
+}
+
+
+
+

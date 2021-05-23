@@ -32,6 +32,9 @@ app.get("/login",function(req,res){
 app.get("/practice",function(req,res){
     res.render(__dirname +"/practice");
 });
+app.get("/basic",function(req,res){
+    res.render(__dirname +"/basic");
+});
 
 app.get("/imge",function(req,res){
     res.render(__dirname +"/imge");
