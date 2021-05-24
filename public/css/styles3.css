@@ -27,7 +27,8 @@
   width: 280px;
   height: 360px;
   /* background-color:#03afffe7; */
-  background: linear-gradient(45deg, #03afffe7 0%, #00ffea 100%);
+  background: linear-gradient(45deg, #ffffff 0%, #00ffea 100%);
+
   margin: 40px 30px;
   padding: 5px;
   position: relative;
