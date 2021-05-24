@@ -10083,15 +10083,15 @@ header.masthead h1 {
 
 .call-to-action {
   position: relative;
-  background-color: #343a40;
-  background: url("../assets/img/blue-bg.jpg") no-repeat center center;
+  background-color: #0c0c0c;
   background-size: cover;
   padding-top: 5.5rem;
   padding-bottom: 5.5rem;
 }
 .call-to-action .overlay {
   position: absolute;
-  background-color: #212529;
+  background-color: #0c0c0c;
+  
   height: 100%;
   width: 100%;
   top: 0;
@@ -10156,32 +10156,16 @@ footer.footer {
   margin: 1%;
 }
 
-.carousel-item{
-  padding: 1% 7%;
+
+
+@media (min-width: 768px) {
+  .carousel-item{
+    padding: 0% 8% 0% 8%;
+  
+  }
 
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  height: 100px;
-  width: 100px;
-  outline: black;
-  background-size: 100%, 100%;
-  background-image: none;
-}
-
-.carousel-control-next-icon:after
-{
-  content: '>';
-  font-size: 200%;
-  color: black ;
-}
-
-.carousel-control-prev-icon:after {
-  content: '<';
-  font-size: 200%;
-  color: black;
-}
 
 
 
