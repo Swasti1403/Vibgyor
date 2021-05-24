@@ -26,7 +26,8 @@
 .card {
   width: 280px;
   height: 360px;
-  background: linear-gradient(45deg, #ffcc00 0%, #ff0058 100%);
+  /* background-color:#03afffe7; */
+  background: linear-gradient(45deg, #03afffe7 0%, #00ffea 100%);
   margin: 40px 30px;
   padding: 5px;
   position: relative;
@@ -38,30 +39,7 @@
 }
 
 
-.card:nth-child(1)::before,
-.card:nth-child(1) {
-  background: linear-gradient(45deg, #ffcc00 0%, #ff0058 100%);
-}
 
-.card:nth-child(2)::before,
-.card:nth-child(2) {
-  background: linear-gradient(315deg, #03a9f4 0%, #ff0058 100%);
-}
-
-.card:nth-child(3)::before,
-.card:nth-child(3) {
-  background: linear-gradient(315deg, #4dff03 0%, #00d0ff 100%);
-}
-
-/* .card span {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  background: rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-} */
 
 .content {
   background: linear-gradient(
@@ -77,14 +55,14 @@
   padding: 40px 20px;
 }
 
-/* .content h2 {
+.content h2 {
   font-size: 2rem;
   margin-bottom: 20px;
-} */
+}
 
-/* .content p {
+.content p {
   margin-bottom: 20px;
-} */
+}
 
 .content a {
   display: inline-block;
