@@ -1,0 +1,7 @@
+.onQuestion{
+    border-radius: 100%;
+}
+
+.markedQuestion{
+    background-color: green;
+}

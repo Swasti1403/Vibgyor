@@ -1,4 +1,6 @@
 <%- include("./views/header") -%>
+<!-- Core theme CSS -->
+<link href="css/styles5.css" rel="stylesheet" />
 <body style="background-color:#56baed;">
     
 <main>
@@ -13,33 +15,39 @@
                     <div class="col-6 mt-4 text-center" >Total Time : {{test_time}}</div> 
                 
             </div>
-            <div class="text-right"style="font-size:large">{{min_left}}:{{sec_left}}</div>
+            <div class="text-right"style="font-size:large" v-if="!time_up">{{min_left}}:{{sec_left}}</div>
             <div class="text-center" style="margin-top: 1%;" v-if="!test_started">
                 <button @click="startTest ">Start Test</button>
             </div>
             <div class="text-center" v-if="test_started && !time_up">
                 
-                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;">Question Number {{current_question+1}}: {{questions[current_question]}}</div>
+                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;">Question Number {{current_question+1}}: {{questions[current_question].question}}</div>
                 <div style="margin-right:7% ;">
-                    <input type="radio" id="option1" :name="current_question" :value="options[current_question].a">
-                    <label for="option1">{{options[current_question].a}}</label><br>
-                    <input type="radio" id="option2" :name="current_question" :value="options[current_question].b">
-                    <label for="option2">{{options[current_question].b}}</label><br>
-                    <input type="radio" id="option3" :name="current_question" :value="options[current_question].c">
-                    <label for="option3">{{options[current_question].c}}</label><br>
-                    <input type="radio" id="option4" :name="current_question" :value="options[current_question].d">
-                    <label for="option4">{{options[current_question].d}}</label>
+                    <input type="radio" id="option1" v-model="answers[current_question]" :value="questions[current_question].a">
+                    <label for="option1">{{questions[current_question].a}}</label><br>
+                    <input type="radio" id="option2" v-model="answers[current_question]" :value="questions[current_question].b">
+                    <label for="option2">{{questions[current_question].b}}</label><br>
+                    <input type="radio" id="option3" v-model="answers[current_question]" :value="questions[current_question].c">
+                    <label for="option3">{{questions[current_question].c}}</label><br>
+                    <input type="radio" id="option4" v-model="answers[current_question]" :value="questions[current_question].d">
+                    <label for="option4">{{questions[current_question].d}}</label>
                 </div>
                 
                 <div>
                     <span ><button style="font-size: 13px;" @click="prevQuestion">Prev Question</button></span>
                     <span style="margin-left: 20%;"><button style="font-size: 13px;" @click="nextQuestion">Next Question</button></span>
                 </div>
+                <div>
+                    <button class="m-1 btn btn-primary btn-sm" v-bind:class="{ 'onQuestion': current_question+1==button, 'markedQuestion': answers[button-1] != null  }" v-for="button in buttons1" @click="changeQuestion(button)">{{button}}</button>
+                </div>
+            </div>
+            <div class="text-center">
+                <span v-if="time_up">
+                    Time Over! Thanks for attempting out test :P 
+                </span>
             </div>
 
-            <span v-if="time_up">
-                Time Over! Thanks for attempting out test :P 
-            </span>
+            
         </div>
     </div>  
 
