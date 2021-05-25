@@ -46,6 +46,10 @@ app.get("/front-page",function(req,res){
     res.render(__dirname +"/front-page")
 });
 
+app.get("/pay",function(req,res){
+    res.render(__dirname +"/pay")
+});
+
 app.post("/login",function(req,res){
     console.log(req.body);
     res.send("login successful");
