@@ -41,5 +41,8 @@ body {
     
 } 
 
+.wrap {  
+    word-wrap: normal;  
+  }  
 
 /* CSS used here will be applied after bootstrap.css */

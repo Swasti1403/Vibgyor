@@ -25,17 +25,27 @@
             </div>
             <div class="text-center" v-if="test_started && !time_up">
                 
-                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;"><h3 style="font-weight:500;">Question No.{{current_question+1}}:  {{questions[current_question].question}}</h3></div>
-                <div style="margin-right:7% ;">
+                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;"><h3 style="font-weight:500; white-space:pre" class="wrap">Question No.{{current_question+1}}:</h3></div>
+                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;"><h3 style="font-weight:500; white-space:pre" class="wrap">{{questions[current_question].question}}</h3></div>
 
+                <div class="text-center">
+
+                    <span class="m-4">
                     <input type="radio" id="option1" v-model="answers[current_question]" :value="questions[current_question].a">
-                    <label for="option1">{{questions[current_question].a}}</label><br>
+                    <label for="option1">{{questions[current_question].a}}</label>
+                    </span>
+                    <span class="m-4">
                     <input type="radio" id="option2" v-model="answers[current_question]" :value="questions[current_question].b">
-                    <label for="option2">{{questions[current_question].b}}</label><br>
+                    <label for="option2">{{questions[current_question].b}}</label>
+                    </span>
+                    <span class="m-4">
                     <input type="radio" id="option3" v-model="answers[current_question]" :value="questions[current_question].c">
-                    <label for="option3">{{questions[current_question].c}}</label><br>
+                    <label for="option3">{{questions[current_question].c}}</label>
+                    </span>
+                    <span class="m-4">
                     <input type="radio" id="option4" v-model="answers[current_question]" :value="questions[current_question].d">
                     <label for="option4">{{questions[current_question].d}}</label>
+                    </span>
                 </div>
                 
                 <div>
