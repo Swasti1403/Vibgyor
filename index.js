@@ -13,6 +13,10 @@ app.get("/",function(req,res){
     res.render(__dirname +"/index");
 });
 
+app.get("/questions/:eventId",function(req,res){
+    console.log(req.params.eventId);
+})
+
 app.get("/past-performance",function(req,res){
     res.render(__dirname +"/past-performance");
 });
@@ -46,9 +50,6 @@ app.get("/front-page",function(req,res){
     res.render(__dirname +"/front-page")
 });
 
-app.get("/features",function(req,res){
-    res.render(__dirname +"/features")
-});
 app.get("/pay",function(req,res){
     res.render(__dirname +"/pay")
 });
