@@ -1,3 +1,4 @@
+
 const app = Vue.createApp({
     data() {
         return {
@@ -59,10 +60,24 @@ const app = Vue.createApp({
             setInterval(function () {
                 this.updateTime();
               }.bind(this), 1000); 
+        },
+        async getQuestionPaper(){
+            // let self = this;
         }
     },
-    created () {
+    async created () {
+        // await this.getQuestionPaper();
+        try{
+            const response = await axios.get('http://localhost:3000/questions/0001');
+            console.log(response.data);
+            console.log(this.questions)
+            this.questions = response.data;
+        }
+        catch (e){
+            console.log(e);
+        }
     }
+    
 });
 
 app.mount('#test');
