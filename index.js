@@ -4,15 +4,21 @@ const request = require("request");
 const https = require("https");
 const app = express();
 const mysql = require('mysql');
+// const con = require("./db")
 
 const con = mysql.createConnection({
-  host: "remotemysql.com",
-  user: "7mG4WIo1Oa",
-  password: "OGhBW0HWc7",
-  database: "7mG4WIo1Oa"
+    host: "remotemysql.com",
+    user: "7mG4WIo1Oa",
+    password: "OGhBW0HWc7",
+    database: "7mG4WIo1Oa"
 });
-   
 
+con.connect(function(err) {
+    if (err) {
+        return console.error('error: ' + err.message);
+    }
+    console.log('Connected to the MySQL server.');
+});
 
 app.set('view engine', 'ejs');
 
@@ -26,13 +32,8 @@ app.get("/",function(req,res){
 app.get("/questions/:eventId",function(req,res){ 
     let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
     let questions = [];
-    con.connect(function(err) {
-        if (err) {
-          return console.error('error: ' + err.message);
-        }
-        console.log('Connected to the MySQL server.');
-        });
-    con.query(query, function (err, results,fields) {
+    
+    con.query(query,async function (err, results,fields) {
         if (err) {
             return console.error('error: ' + err.message);
         }
@@ -48,10 +49,8 @@ app.get("/questions/:eventId",function(req,res){
             }
             questions.push(myObject);
         }
-        return questions;
+        await res.json(questions);
     });
-    con.end();
-   
 })
 
 app.get("/past-performance",function(req,res){
