@@ -4,7 +4,6 @@ const request = require("request");
 const https = require("https");
 const app = express();
 const mysql = require('mysql');
-// const con = require("./db")
 
 const con = mysql.createConnection({
     host: "remotemysql.com",
@@ -13,12 +12,6 @@ const con = mysql.createConnection({
     database: "7mG4WIo1Oa"
 });
 
-con.connect(function(err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-    }
-    console.log('Connected to the MySQL server.');
-});
 
 app.set('view engine', 'ejs');
 
@@ -32,8 +25,15 @@ app.get("/",function(req,res){
 app.get("/questions/:eventId",function(req,res){ 
     let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
     let questions = [];
-    
-    con.query(query,async function (err, results,fields) {
+
+    con.connect(function(err) {
+        if (err) {
+            return console.error('error: ' + err.message);
+        }
+        console.log('Connected to the MySQL server.');
+    });
+
+    con.query(query, async function (err, results,fields) {
         if (err) {
             return console.error('error: ' + err.message);
         }
@@ -50,6 +50,7 @@ app.get("/questions/:eventId",function(req,res){
             questions.push(myObject);
         }
         await res.json(questions);
+        con.end();
     });
 })
 
