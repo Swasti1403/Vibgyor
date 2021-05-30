@@ -46,6 +46,9 @@ app.get("/front-page",function(req,res){
     res.render(__dirname +"/front-page")
 });
 
+app.get("/features",function(req,res){
+    res.render(__dirname +"/features")
+});
 app.get("/pay",function(req,res){
     res.render(__dirname +"/pay")
 });

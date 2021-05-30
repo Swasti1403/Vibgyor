@@ -5,51 +5,48 @@
 
 <body>
 
-    <div class="container-fluid db" style="background-image: radial-gradient(rgb(186, 245, 174), rgb(224, 240, 243))">
-        <div id="test"  style="margin-top: 5%;">
+    <div class="container-fluid db"  style="background-color: #e9f5f8;">
+        <div id="test"  style="margin-top: 3%;">
             <div class="mt-4 text-center"><h1><strong>{{test_name}}</strong></h1></div>
             <div class="row" style="margin-bottom: 2%;">
-                
-                    <div class="col-6 mt-4 text-center mt-5"><h5><strong>Total Questions : {{total_questions}}</strong></h5></div>
-                    <div class="col-6 mt-4 text-center mt-5" ><h5><strong>Total Time : {{test_time}}</strong></h5></div> 
-                    <div class="text-center">
-                        <div v-if="!time_up">
-                            <button class="btn btn-primary timer"><strong>{{min_left}}:{{sec_left}}</strong> </button>
-                        </div>
-                    </div>
-                
+                <div class="col-6 mt-4 text-center mt-5"><h5><strong>Total Questions : {{total_questions}}</strong></h5></div>
+                <div class="col-6 mt-4 text-center mt-5" ><h5><strong>Total Time : {{test_time}}</strong></h5></div> 
+            </div>
+            <div class="text-center"v-if="!time_up">
+                <button class="timer btn btn-light btn-lg mb-1"><strong>{{min_left}}:{{sec_left}}</strong> </button>
             </div>
             
             <div class="text-center" style="margin-top: 1%;" v-if="!test_started">
-                <button class="start btn" @click="startTest "><strong>Start Test</strong> </button>
+                <button class="start btn mt-2" @click="startTest "><strong>Start Test</strong> </button>
             </div>
-            <div class="text-center" v-if="test_started && !time_up">
-                
-                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;"><h3 style="font-weight:500; white-space:pre" class="wrap">Question No.{{current_question+1}}:</h3></div>
-                <div style="font-size: medium;font-weight: bold;margin-bottom: 1%;"><h3 style="font-weight:500; white-space:pre" class="wrap">{{questions[current_question].question}}</h3></div>
-
+            <div class="text-center " v-if="test_started && !time_up">
+                <span class="row ml-5 mr-5" style="background-color: rgb(244, 246, 247);margin-left: 4%;margin-right: 4%;">
+                <div class="col-lg-6 text-lg-right text-sm-center" style="font-size: medium;font-weight: bold;margin-bottom: 1%;margin-top: 1%;"><h5 style="font-weight:600; white-space:pre" class="wrap">Question No.{{current_question+1}}:</h5></div>
+                <div class="col-lg-6 text-lg-left text-sm-center" style="font-size: medium;font-weight: bold;margin-bottom: 1%;margin-top: 1%;"><h5 style="font-weight:500; white-space:pre" class="wrap">{{questions[current_question].question}}</h5></div>
+                </span>
+                <hr style="width:30%;margin: auto;background-color:green;">
                 <div class="text-center">
 
                     <span class="m-4">
                     <input type="radio" id="option1" v-model="answers[current_question]" :value="questions[current_question].a">
-                    <label for="option1">{{questions[current_question].a}}</label>
+                    <label for="option1"><h5 class="mt-2">{{questions[current_question].a}}</h5></label>
                     </span>
                     <span class="m-4">
                     <input type="radio" id="option2" v-model="answers[current_question]" :value="questions[current_question].b">
-                    <label for="option2">{{questions[current_question].b}}</label>
+                    <label for="option2"><h5  class="mt-2">{{questions[current_question].b}}</h5></label>
                     </span>
                     <span class="m-4">
                     <input type="radio" id="option3" v-model="answers[current_question]" :value="questions[current_question].c">
-                    <label for="option3">{{questions[current_question].c}}</label>
+                    <label for="option3"><h5  class="mt-2">{{questions[current_question].c}}</h5></label>
                     </span>
                     <span class="m-4">
                     <input type="radio" id="option4" v-model="answers[current_question]" :value="questions[current_question].d">
-                    <label for="option4">{{questions[current_question].d}}</label>
+                    <label for="option4"><h5  class="mt-2">{{questions[current_question].d}}</h5></label>
                     </span>
                 </div>
                 
                 <div>
-                    <span ><button class="btn btn-outline-secondary mb-4 mt-3" style="font-size: 13px;" @click="prevQuestion">Prev Question</button></span>
+                    <span ><button class="btn mb-4 mt-3" style="font-size: 13px;background-color: #4885ed;color: white;" @click="prevQuestion">Previous Question</button></span>
                     <span style="margin-left: 20%;"><button class="btn btn-success mb-4 mt-3" style="font-size: 13px;" @click="nextQuestion">Next Question</button></span>
                 </div>
                 <div>
@@ -60,7 +57,7 @@
             </div>
             <div class="text-center">
                 <span v-if="time_up">
-                    Time Over! Thanks for attempting out test :P 
+                    <h5 class="mt-5">Time Over! Thanks for attempting out test ..<i class="fa fa-thumbs-up mr-3" aria-hidden="true"></i></h5> 
                 </span>
             </div>
 

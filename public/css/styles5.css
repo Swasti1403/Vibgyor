@@ -1,18 +1,20 @@
 body {
-    background:radial-gradient(rgb(186, 245, 174), rgb(224, 240, 243));
+    background-color: #e9f5f8;
 }
+  
 
 
 .onQuestion{
-    background-color: rgb(41, 61, 245);
+    background-color: #518ef8;
 }
 
 .markedQuestion{
-    background-color: rgb(123, 241, 76);
+    background-color: rgb(51, 165, 6);
 }
 .timer {
     border-radius: 100%;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    
 }
 
 .start {
@@ -20,13 +22,10 @@ body {
     background-image: radial-gradient(white, rgb(235, 70, 92));
 }
 
-.dot {
-    height: 10px;
-    width: 1px;
-    background-color: #bbb;
-    border-radius: 100%;
-    display: inline-block;
-  }
+input[type=radio] {
+    width: 15px;
+    height: 15px;
+}
 
 .btn-circle.btn-sm { 
     width: 20px; 
