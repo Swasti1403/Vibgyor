@@ -3,6 +3,16 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 const app = express();
+const mysql = require('mysql');
+
+const con = mysql.createConnection({
+  host: "remotemysql.com",
+  user: "7mG4WIo1Oa",
+  password: "OGhBW0HWc7",
+  database: "7mG4WIo1Oa"
+});
+   
+
 
 app.set('view engine', 'ejs');
 
@@ -13,8 +23,35 @@ app.get("/",function(req,res){
     res.render(__dirname +"/index");
 });
 
-app.get("/questions/:eventId",function(req,res){
-    console.log(req.params.eventId);
+app.get("/questions/:eventId",function(req,res){ 
+    let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
+    let questions = [];
+    con.connect(function(err) {
+        if (err) {
+          return console.error('error: ' + err.message);
+        }
+        console.log('Connected to the MySQL server.');
+        });
+    con.query(query, function (err, results,fields) {
+        if (err) {
+            return console.error('error: ' + err.message);
+        }
+        console.log("query executed");
+        for(let i=0;i<results.length;i++){
+            let myObject ={
+                id: results[i]['question_id'] ,
+                question:results[i]['content'] ,
+                a:results[i]['option_A'] ,
+                b:results[i]['option_B'],
+                c:results[i]['option_C'],
+                d:results[i]['option_D']
+            }
+            questions.push(myObject);
+        }
+        return questions;
+    });
+    con.end();
+   
 })
 
 app.get("/past-performance",function(req,res){
