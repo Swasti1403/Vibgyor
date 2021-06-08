@@ -1,0 +1,59 @@
+<%- include("./views/header") -%>
+<!-- Core theme CSS -->
+<link href="css/styles5.css" rel="stylesheet" />
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+
+    <div class="container-fluid db"  style="background-color: #e9f5f8;">
+        <div id="test"  style="margin-top: 3%;">
+            <div class="mt-4 text-center"><h1><strong>{{test_name}}</strong></h1></div>
+            <div class="row" style="margin-bottom: 2%;">
+                <div class="col-6 mt-4 text-center mt-5"><h5><strong>Total Questions : {{total_questions}}</strong></h5></div>
+                <div class="col-6 mt-4 text-center mt-5" ><h5><strong>Total Time : {{test_time}}</strong></h5></div> 
+            </div>
+            <div class="text-center"v-if="!time_up">
+                <button class="timer btn btn-light btn-lg mb-1"><strong>{{min_left}}:{{sec_left}}</strong> </button>
+            </div>
+            
+            <div class="text-center" style="margin-top: 1%;" v-if="!test_started">
+                <button class="start btn mt-2" @click="startTest "><strong>Start Test</strong> </button>
+            </div>
+            <div class="text-center " v-if="test_started && !time_up">
+                <span class="row ml-5 mr-5" style="background-color: rgb(244, 246, 247);margin-left: 4%;margin-right: 4%;">
+                <div class="col-lg-6 text-lg-right text-sm-center" style="font-size: medium;font-weight: bold;margin-bottom: 1%;margin-top: 1%;"><h5 style="font-weight:600; white-space:pre" class="wrap">Question No.{{current_question+1}}:</h5></div>
+                <div class="col-lg-6 text-lg-left text-sm-center" style="font-size: medium;font-weight: bold;margin-bottom: 1%;margin-top: 1%;"><h5 style="font-weight:500; white-space:pre" class="wrap">{{questions[current_question].question}}</h5></div>
+                </span>
+                <hr style="width:30%;margin: auto;background-color:green;">
+                <div class="text-center">
+
+                    <span class="m-4">
+                        <label for="answer"><h5 class="mt-2">Answer</h5></label>
+                        <input type="text" id="answer" v-model="answers[current_question]">
+                    </span>
+                </div>
+                
+                <div>
+                    <span ><button class="btn mb-4 mt-3" style="font-size: 13px;background-color: #4885ed;color: white;" @click="prevQuestion">Previous Question</button></span>
+                    <span style="margin-left: 20%;"><button class="btn btn-success mb-4 mt-3" style="font-size: 13px;" @click="nextQuestion">Next Question</button></span>
+                </div>
+                <div>
+                    <button class="btn btn-circle btn-sm"v-bind:class="{ 'onQuestion': current_question+1==button, 'markedQuestion': answers[button-1] != null  }" v-for="button in buttons1" @click="changeQuestion(button)">{{button}}</button>
+                </div>
+
+                
+            </div>
+            <div class="text-center">
+                <span v-if="time_up">
+                    <h5 class="mt-5">Time Over! Thanks for attempting out test ..<i class="fa fa-thumbs-up mr-3" aria-hidden="true"></i></h5> 
+                </span>
+            </div>
+
+            
+            
+        </div>
+    </div> 
+    <script type="module" src="./vue.js" ></script>
+
+</body>
+<%- include("./views/footer") -%>

@@ -72,6 +72,11 @@ app.get("/login",function(req,res){
 app.get("/practice",function(req,res){
     res.render(__dirname +"/practice");
 });
+
+app.get("/practice1",function(req,res){
+    res.render(__dirname +"/practice1");
+});
+
 app.get("/basic",function(req,res){
     res.render(__dirname +"/basic");
 });
