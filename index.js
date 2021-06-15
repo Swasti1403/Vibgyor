@@ -4,14 +4,24 @@ const request = require("request");
 const https = require("https");
 const app = express();
 const mysql = require('mysql');
+const authController = require("./controller/auth");
+const cookieParser = require("cookie-parser");
 
 app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(cookieParser());
 
-app.get("/",function(req,res){
-    res.render(__dirname +"/index");
+app.get("/", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +'/index', { data : {
+            user : req.user
+        }});
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
 app.get("/questions/:eventId",function(req,res){ 
@@ -65,10 +75,6 @@ app.get("/test",function(req,res){
     res.render(__dirname +"/test");
 });
 
-app.get("/login",function(req,res){
-    res.render(__dirname +"/login");
-});
-
 app.get("/practice",function(req,res){
     res.render(__dirname +"/practice");
 });
@@ -95,19 +101,19 @@ app.get("/pay",function(req,res){
     res.render(__dirname +"/pay")
 });
 
-app.post("/login",function(req,res){
-    console.log(req.body);
-    res.send("login successful");
+app.get("/login",function(req,res){
+    res.render(__dirname +"/login", { data: {}});
 });
+
+app.post("/login", authController.login);
 
 app.get("/register",function(req,res){
-    res.render(__dirname +"/register");
+    res.render(__dirname +"/register", { data: {}});
 });
 
-app.post("/register",function(req,res){
-    console.log(req.body);
-    res.send("Registration successful");
-});
+app.post("/register", authController.register);
+
+app.get("/logout", authController.logout);
 
 app.get("/forgetPassword",function(req,res){
     res.render(__dirname +"/forget-password");
