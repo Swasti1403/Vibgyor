@@ -6,6 +6,7 @@ const app = express();
 const mysql = require('mysql');
 const authController = require("./controller/auth");
 const cookieParser = require("cookie-parser");
+const { db } = require("./constants");
 
 app.set('view engine', 'ejs');
 
@@ -28,12 +29,7 @@ app.get("/questions/:eventId",function(req,res){
     let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
     let questions = [];
 
-    const con = mysql.createConnection({
-        host: "remotemysql.com",
-        user: "7mG4WIo1Oa",
-        password: "OGhBW0HWc7",
-        database: "7mG4WIo1Oa"
-    });
+    const con = mysql.createConnection(db);
     
     // con.connect(function(err) {
     //     if (err) {
@@ -61,10 +57,38 @@ app.get("/questions/:eventId",function(req,res){
         await res.json(questions);
         con.end();
     });
-})
+});
 
-app.get("/past-performance",function(req,res){
-    res.render(__dirname +"/past-performance");
+app.get("/event/:eventId",function(req,res){ 
+    let query = `select * from Events where event_id = ${req.params.eventId}`;
+    let event = {};
+
+    const con = mysql.createConnection(db);
+
+    con.query(query, async function (err, results) {
+        if (err) {
+            return console.error('error: ' + err.message);
+        }
+        console.log("query executed");
+        console.log(results);
+        event.event_id = results[0].event_id;
+        event.event_name = results[0].event_name;
+        event.total_questions = results[0].total_questions;
+        event.time_in_sec = results[0].time_in_sec;
+        await res.json(event);
+        con.end();
+    });
+});
+
+app.get("/past-performance", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +'/past-performance', { data : {
+            user : req.user
+        }});
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
 app.get("/all-packages",function(req,res){
@@ -75,12 +99,26 @@ app.get("/test",function(req,res){
     res.render(__dirname +"/test");
 });
 
-app.get("/practice",function(req,res){
-    res.render(__dirname +"/practice");
+app.get("/practice", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +'/practice', { data : {
+            user : req.user
+        }});
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
-app.get("/practice1",function(req,res){
-    res.render(__dirname +"/practice1");
+app.get("/practice1", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +'/practice1', { data : {
+            user : req.user
+        }});
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
 app.get("/basic",function(req,res){

@@ -1,17 +1,13 @@
 const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
+const { db } = require('../constants');
 const { promisify } = require('util');
 
 exports.register = (req, res) => {
     try {
         const { name, email, contact, password, confirm_password } = req.body;
 
-        const con = mysql.createConnection({
-            host: "remotemysql.com",
-            user: "7mG4WIo1Oa",
-            password: "OGhBW0HWc7",
-            database: "7mG4WIo1Oa"
-        });
+        const con = mysql.createConnection(db);
 
         let query = `select email from Users where email = "${email}"`;
         con.query(query, async (err, results) => {
@@ -57,12 +53,7 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
     try {
         const { email, password } = req.body;
-        const con = mysql.createConnection({
-            host: "remotemysql.com",
-            user: "7mG4WIo1Oa",
-            password: "OGhBW0HWc7",
-            database: "7mG4WIo1Oa"
-        });
+        const con = mysql.createConnection(db);
     
         let query = `select * from Users where email = "${email}"`;
         con.query(query, async (err, results) => {
@@ -102,12 +93,7 @@ exports.isLoggedIn = async (req, res, next) => {
         try {
             const decoded = await promisify(jwt.verify)(req.cookies.Vibgyor, 'Vibgyor');
 
-            const con = mysql.createConnection({
-                host: "remotemysql.com",
-                user: "7mG4WIo1Oa",
-                password: "OGhBW0HWc7",
-                database: "7mG4WIo1Oa"
-            });
+            const con = mysql.createConnection(db);
             let query = `select * from Users where user_id = "${decoded.user_id}"`;
             con.query(query, async (err, results) => {
                 req.user = results[0];

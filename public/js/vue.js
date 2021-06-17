@@ -1,3 +1,4 @@
+// const { default: axios } = require("axios");
 
 const app = Vue.createApp({
     data() {
@@ -6,9 +7,6 @@ const app = Vue.createApp({
             test_name: "Abacus Level 1 - Free",
             test_time: "5 mins",
             total_questions: "4",
-            total_time: 180,
-            total_min: 0,
-            total_sec: 30,
             min_left: 0,
             sec_left: 30,
             time_up: false,
@@ -18,8 +16,8 @@ const app = Vue.createApp({
                 {id:3,question:'06\n+7\n+8\n+9','a':10,'b':11,'c':12,'d':30},
                 {id:4,question:'07\n+8\n+9','a':24,'b':11,'c':12,'d':13}],
             answers: [null,null,null,null],
-            buttons1: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
-            
+            buttons: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
+            event_id: 0001,
             current_question: 0,
             test_started: false,
         }
@@ -61,17 +59,30 @@ const app = Vue.createApp({
                 this.updateTime();
               }.bind(this), 1000); 
         },
-        async getQuestionPaper(){
-            // let self = this;
+        secondsToTime(sec){
+            let minutes = Math.floor(sec/60);
+            let seconds = sec%60;
+            this.min_left = minutes;
+            this.sec_left = seconds;
+            return `${minutes} mins ${seconds} secs`;
+        },
+        getButtons(total_questions){
+            let buttons = [];
+            for(let i=1;i<total_questions;i++){
+                buttons.push(i);
+            }
+            return buttons;
         }
     },
     async created () {
         // await this.getQuestionPaper();
         try{
             const response = await axios.get('http://localhost:3000/questions/0001');
-            console.log(response.data);
-            console.log(this.questions)
             this.questions = response.data;
+            // const response1 = await axios.get(`http://localhost:3000/event/${event_id}`);
+            // this.test_name = response1.data.event_name;
+            // this.test_time = this.secondsToTime(response1.data.event_time);
+            // this.buttons = this.getButtons(response1.data.total_questions);
         }
         catch (e){
             console.log(e);
