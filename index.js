@@ -13,6 +13,7 @@ app.set('view engine', 'ejs');
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 app.get("/", authController.isLoggedIn, function(req,res){
     if( req.user ){
@@ -24,6 +25,15 @@ app.get("/", authController.isLoggedIn, function(req,res){
         res.redirect('/login');
     }
 });
+
+app.get("/user", authController.isLoggedIn, function(req, res){
+    if( req.user ){
+        res.json(req.user);
+    }
+    else {
+        res.send({});
+    }
+})
 
 app.get("/questions/:eventId",function(req,res){ 
     let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
@@ -161,6 +171,11 @@ app.post("/forgetPassword",function(req,res){
     console.log(req.body);
     res.send("Password changed");
 });
+
+app.post("/testFinished", function(req,res){
+    console.log(req.body);
+    res.send({});
+})
 
 app.listen(process.env.PORT || 3000,function(){
     console.log("server is running on port 3000");

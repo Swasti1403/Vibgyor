@@ -1,9 +1,8 @@
-// const { default: axios } = require("axios");
-
 const app = Vue.createApp({
     data() {
         return {
             test: true,
+            user_id: '',
             test_name: 'Loading',
             test_time: 'Loading',
             total_questions: 'Loading',
@@ -97,6 +96,14 @@ const app = Vue.createApp({
             }
             return buttons;
         },
+        getAnswers(total_questions){
+            total_questions = Number(total_questions);
+            let answers = [];
+            for(let i=0;i<total_questions;i++){
+                answers.push(null);
+            }
+            return answers;
+        },
         calculateScore(){
             this.attempted = 0;
             this.score = 0;
@@ -113,6 +120,17 @@ const app = Vue.createApp({
                 }
             }
             this.correct_answers = this.score;
+        },
+        questionIdAnswersMapper(){
+            let obj = [];
+            for(let i=0;i<this.answers.length;i++){
+                obj.push({
+                    question_id:this.questions[i].id,
+                    answer:this.answers[i]
+                });
+            }
+            console.log(obj);
+            return obj;
         }
     },
     async created () {
@@ -125,7 +143,10 @@ const app = Vue.createApp({
             this.test_name = response1.data.event_name;
             this.test_time = this.secondsToTime(response1.data.time_in_sec);
             this.buttons = this.getButtons(response1.data.total_questions);
+            this.answers = this.getAnswers(response1.data.total_questions);
             this.total_questions = response1.data.total_questions;
+            const response2 = await axios.get(`http://localhost:3000/user`);
+            this.user_id = response2.data.user_id;
         }
         catch (e){
             console.log(e);
@@ -136,6 +157,17 @@ const app = Vue.createApp({
             handler: function (val) {
                 if(val == true){
                     this.calculateScore();
+                    axios.post(`http://localhost:3000/testFinished`,{
+                        user_id: this.user_id,
+                        event_id: this.event_id,
+                        total_questions: this.total_questions,
+                        attempted: this.attempted,
+                        correct_answers: this.correct_answers,
+                        wrong_answers: this.wrong_answers,
+                        score: this.score,
+                        total_score: this.total_questions,
+                        answers: this.questionIdAnswersMapper(),
+                    });
                 }
             }
         }
