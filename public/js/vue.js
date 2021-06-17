@@ -85,6 +85,7 @@ const app = Vue.createApp({
             this.test_name = response1.data.event_name;
             this.test_time = this.secondsToTime(response1.data.time_in_sec);
             this.buttons = this.getButtons(response1.data.total_questions);
+            this.total_questions = response1.data.total_questions;
         }
         catch (e){
             console.log(e);
