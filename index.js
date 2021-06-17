@@ -50,7 +50,8 @@ app.get("/questions/:eventId",function(req,res){
                 a:results[i]['option_A'] ,
                 b:results[i]['option_B'],
                 c:results[i]['option_C'],
-                d:results[i]['option_D']
+                d:results[i]['option_D'],
+                answer:results[i]['answer'],
             }
             questions.push(myObject);
         }

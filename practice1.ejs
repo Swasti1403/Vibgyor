@@ -45,7 +45,14 @@
             </div>
             <div class="text-center">
                 <span v-if="time_up">
-                    <h5 class="mt-5">Time Over! Thanks for attempting out test ..<i class="fa fa-thumbs-up mr-3" aria-hidden="true"></i></h5> 
+                    <h5 class="mt-5">Time Over! Thanks for attempting out test ..<i class="fa fa-thumbs-up mr-3" aria-hidden="true"></i></h5>
+                    <h4 class="mt-5">Test : {{test_name}}</h4>
+                    <h5 class="mt-5">Total Questions : {{total_questions}}</h5>
+                    <h5 class="mt-5">Attempted : {{attempted}}</h5>
+                    <h5 class="mt-5">Correct Questions : {{correct_answers}}</h5>
+                    <h5 class="mt-5">Wrong Questions : {{wrong_answers}}</h5>
+                    <h5 class="mt-5">Score : {{score}}/{{total_questions}}</h5>
+
                 </span>
             </div>
 
