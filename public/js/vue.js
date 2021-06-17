@@ -4,11 +4,11 @@ const app = Vue.createApp({
     data() {
         return {
             test: true,
-            test_name: "Abacus Level 1 - Free",
-            test_time: "5 mins",
-            total_questions: "4",
+            test_name: "",
+            test_time: "",
+            total_questions: "",
             min_left: 0,
-            sec_left: 30,
+            sec_left: 0,
             time_up: false,
             questions: [
                 {id:1,question:'020000\n+30000\n+50000\n+20000\n+00300\n+50000','a':10,'b':11,'c':12,'d':13},
@@ -42,15 +42,20 @@ const app = Vue.createApp({
             this.clock();
         },
         updateTime(){
+            this.sec_left = Number(this.sec_left);
             this.sec_left--;
-            if(this.sec_left <= 0){
+            if(this.sec_left < 0){
                 if(this.min_left > 0){
                     this.min_left--;
-                    this.sec_left = 60;
+                    this.sec_left = 59;
                 }
                 else{
                     this.time_up = true;
                 }
+            }
+            this.sec_left = this.sec_left.toString();
+            if(this.sec_left.length<2){
+                this.sec_left = `0${this.sec_left}`;
             }
         },
         clock(){
@@ -65,6 +70,10 @@ const app = Vue.createApp({
             let seconds = sec%60;
             this.min_left = minutes;
             this.sec_left = seconds;
+            this.sec_left = this.sec_left.toString();
+            if(this.sec_left.length<2){
+                this.sec_left = `0${this.sec_left}`;
+            }
             return `${minutes} mins ${seconds} secs`;
         },
         getButtons(total_questions){
