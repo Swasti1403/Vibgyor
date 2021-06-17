@@ -42,7 +42,7 @@ app.get("/questions/:eventId",function(req,res){
         if (err) {
             return console.error('error: ' + err.message);
         }
-        console.log("query executed");
+        console.log("Question query executed");
         for(let i=0;i<results.length;i++){
             let myObject ={
                 id: results[i]['question_id'] ,
@@ -69,8 +69,7 @@ app.get("/event/:eventId",function(req,res){
         if (err) {
             return console.error('error: ' + err.message);
         }
-        console.log("query executed");
-        console.log(results);
+        console.log("Event query executed");
         event.event_id = results[0].event_id;
         event.event_name = results[0].event_name;
         event.total_questions = results[0].total_questions;
