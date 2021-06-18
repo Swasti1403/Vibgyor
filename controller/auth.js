@@ -38,10 +38,10 @@ exports.register = (req, res) => {
                     console.log(err);
                 }
                 else {
-                    con.end();
-                    return res.render('../register', { data : { success_message: 'User Registered Successfully'}});
+                    res.render('../register', { data : { success_message: 'User Registered Successfully'}});
                 }
             });
+            con.end();
         });
     } catch (error) {
         console.log(error);
@@ -63,6 +63,7 @@ exports.login = (req, res) => {
                 return res.status(500).render('../login', { data: { error_message: 'Something is wrong, please try again later'}});
             }
             if ( results.length == 0 || results[0].password !== password ) {
+                con.end();
                 res.status(401).render('../login', { data: { error_message: 'Invalid email or password'}});
             }
             else {
@@ -79,11 +80,13 @@ exports.login = (req, res) => {
 
                 res.cookie('Vibgyor', token, cookieOptions);
                 res.status(200).redirect('/');
+                con.end();
             }
         });
 
     } catch (error) {
         console.log(error);
+        con.end();
         res.status(500).render('../login', { data: { error_message: 'Something is wrong, please try again later'}});
     }
 }

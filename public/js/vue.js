@@ -129,7 +129,6 @@ const app = Vue.createApp({
                     answer:this.answers[i]
                 });
             }
-            console.log(obj);
             return obj;
         }
     },

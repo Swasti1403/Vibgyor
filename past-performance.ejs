@@ -21,10 +21,25 @@
                             <th>Correct Answers</th>
                             <th>Wrong Answers</th>
                             <th>Total Score</th>
+                            <th>Your Score</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <% for(let i=0;i<data.attempts.length; i++){ %>
+                            <tr>
+                                <td><%= i %></td>
+                                <td><%= data.attempts[i].event_name %></td>
+                                <td><%= data.attempts[i].date_time %></td>
+                                <td><%= data.attempts[i].total_questions %></td>
+                                <td><%= data.attempts[i].attempted %></td>
+                                <td><%= data.attempts[i].correct_answers %></td>
+                                <td><%= data.attempts[i].wrong_answers %></td>
+                                <td><%= data.attempts[i].total_score %></td>
+                                <td><%= data.attempts[i].your_score %></td>
+                            </tr>
+                        <% } %>
+                        
+                        <!-- <tr>
                             <td>1</td>
                             <td>Vedic Level 1</td>
                             <td>2011/04/25 09:00 PM</td>
@@ -33,7 +48,7 @@
                             <td>20</td>
                             <td>40</td>
                             <td>20</td>
-                            
+                            <td>20</td>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -44,7 +59,7 @@
                             <td>20</td>
                             <td>40</td>
                             <td>20</td>
-                            
+                            <td>20</td>
                         </tr>
                         <tr>
                             <td>1</td>
@@ -55,8 +70,8 @@
                             <td>20</td>
                             <td>40</td>
                             <td>20</td>
-                            
-                        </tr>
+                            <td>20</td>
+                        </tr> -->
                         
                     </tbody>
                 </table>
