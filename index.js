@@ -1,7 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
-const https = require("https");
 const app = express();
 const mysql = require('mysql');
 const authController = require("./controller/auth");
@@ -10,10 +8,10 @@ const { db } = require("./constants");
 
 app.set('view engine', 'ejs');
 
-app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.static("public"));
 
 app.get("/", authController.isLoggedIn, function(req,res){
     if( req.user ){
@@ -93,7 +91,7 @@ app.get("/event/:eventId",function(req,res){
 app.get("/past-performance", authController.isLoggedIn, function(req,res){
     
     if( req.user ){
-        let query = `select E.event_name, A.total_score, A.your_score, A.total_questions, A.attempted, A.correct_answers, A.wrong_answers, A.date_attempted from Attempts A, Events E where E.event_id = A.event_id and user_id = "${req.user.user_id}"`;
+        let query = `select E.event_name, A.attempt_id, A.total_score, A.your_score, A.total_questions, A.attempted, A.correct_answers, A.wrong_answers, A.date_attempted from Attempts A, Events E where E.event_id = A.event_id and user_id = "${req.user.user_id}"`;
         let attempts = [];
 
         const con = mysql.createConnection(db);
@@ -112,12 +110,47 @@ app.get("/past-performance", authController.isLoggedIn, function(req,res){
                     correct_answers: results[i].correct_answers,
                     wrong_answers: results[i].wrong_answers,
                     total_score: results[i].total_score,
-                    your_score: results[i].your_score
+                    your_score: results[i].your_score,
+                    attempt_id: results[i].attempt_id
                 });
             }
             res.render(__dirname +'/past-performance', { data : {
                 user : req.user,
                 attempts: attempts,
+            }});
+            con.end();
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.get("/past-performance1/:attempt_id", authController.isLoggedIn, function(req,res){
+    
+    if( req.user ){
+        let query = `select AN.attempt_id, E.event_name, Q.content, Q.answer as correct_answer, AN.answer as your_answer from Answers AN, Questions Q, Attempts ATT, Events E where AN.question_id = Q.question_id and ATT.event_id = E.event_id and ATT.attempt_id = AN.attempt_id and ATT.attempt_id = ${req.params.attempt_id} and ATT.user_id = ${req.user.user_id}`;
+        let details = [];
+
+        const con = mysql.createConnection(db);
+
+        con.query(query, async function (err, results) {
+            if (err) {
+                return console.error('error: ' + err.message);
+            }
+            console.log("Answers fetching query executed");
+            for(let i=0;i<results.length;i++){
+                details.push({
+                    attempt_id: results[i].attempt_id,
+                    event_name: results[i].event_name,
+                    question: results[i].content,
+                    correct_answer: results[i].correct_answer,
+                    your_answer: results[i].your_answer,
+                });
+            }
+            res.render(__dirname +'/past-performance1', { data : {
+                user : req.user,
+                details: details,
             }});
             con.end();
         });
