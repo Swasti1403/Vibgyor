@@ -2,10 +2,38 @@
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-        <div class="row">
+        <div class="card">
+            <div class="card-header">
+              Details
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Name : <%=data.user.name%>
+                </h5>
+                <h5 class="card-title">
+                    User Id : <%=data.user.user_id%>
+                </h5>
+                <h5 class="card-title">
+                    Email : <%=data.user.email%>
+                </h5>
+                <h5 class="card-title">
+                    Contact : <%=data.user.contact%>
+                </h5>
+                <h5 class="card-title">
+                    Profile Verified : <%=data.user.profile_verified%>
+                </h5>
+                <h5 class="card-title">
+                    Mode : <%=data.user.mode%>
+                </h5>
+                <% if(data.user.profile_verified == "false"){ %>
+                    <p class="card-text">To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9999999999</p>
+                <% } %>
+            </div>
+        </div>
+        <!-- <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Personal Details</li>
+        </ol> -->
+        <!-- <div class="row">
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Primary Card</div>
@@ -42,7 +70,7 @@
                     </div>
                 </div>
             </div>
-        </div>   
+        </div>    -->
     </div>
     
 </main>

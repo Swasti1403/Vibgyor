@@ -160,8 +160,15 @@ app.get("/past-performance1/:attempt_id", authController.isLoggedIn, function(re
     }
 });
 
-app.get("/all-packages",function(req,res){
-    res.render(__dirname +"/all-packages");
+app.get("/all-packages", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +'/all-packages', { data : {
+            user : req.user
+        }});
+    }
+    else {
+        res.redirect('/login');
+    }
 });
 
 app.get("/test",function(req,res){
@@ -181,12 +188,29 @@ app.get("/practice", authController.isLoggedIn, function(req,res){
 
 app.get("/practice1", authController.isLoggedIn, function(req,res){
     if( req.user ){
-        res.render(__dirname +'/practice1', { data : {
-            user : req.user
-        }});
-    }
-    else {
-        res.redirect('/login');
+        let query = `select P.event_id, E.event_name from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
+        let events = [];
+
+        const con = mysql.createConnection(db);
+
+        con.query(query, async function (err, results) {
+            if (err) {
+                return console.error('error: ' + err.message);
+            }
+            console.log("Packages fetching query executed");
+            for(let i=0;i<results.length;i++){
+                events.push({
+                    event_id:results[i].event_id,
+                    event_name:results[i].event_name,
+                });
+            }
+            console.log(events);
+            res.render(__dirname +'/practice1', { data : {
+                user : req.user,
+                events: events,
+            }});
+            con.end();
+        });
     }
 });
 

@@ -4,7 +4,7 @@
         <h1 class="mt-4">Details for attempt</h1>
         <ol class="breadcrumb mb-4">
             
-            <li class="breadcrumb-item active">This page shows all questions which were part of test</li>
+            <li class="breadcrumb-item active">This page shows all questions which were part of test <%= data.details[0].event_name %></li>
         </ol>
         
         <div class="card mb-4">
@@ -15,7 +15,6 @@
                         <tr>
                             <th>S No.</th>
                             <th>Attempt Id</th>
-                            <th>Paper Name</th>
                             <th>Question</th>
                             <th>Correct Answer</th>
                             <th>Your Answer</th>
@@ -26,7 +25,6 @@
                             <tr>
                                 <td><%= i+1 %></td>
                                 <td><%= data.details[i].attempt_id %></td>
-                                <td><%= data.details[i].event_name %></td>
                                 <td><%= data.details[i].question %></td>
                                 <td><%= data.details[i].correct_answer %></td>
                                 <td><%= data.details[i].your_answer %></td>

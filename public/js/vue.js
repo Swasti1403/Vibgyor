@@ -2,6 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             test: true,
+            test_window: false,
             user_id: '',
             test_name: 'Loading',
             test_time: 'Loading',
@@ -22,7 +23,7 @@ const app = Vue.createApp({
             answers: [null,null,null,null],
             correct_answers: [],
             buttons: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
-            event_id: '0001',
+            event_id: 'B000',
             current_question: 0,
             test_started: false,
         }
@@ -130,26 +131,48 @@ const app = Vue.createApp({
                 });
             }
             return obj;
+        },
+        async init(){
+            try{
+                const response = await axios.get(`http://localhost:3000/questions/${this.event_id}`);
+                this.questions = response.data;
+                this.correct_answers = this.setAnswers(response.data);
+                const response1 = await axios.get(`http://localhost:3000/event/${this.event_id}`);
+                this.test_name = response1.data.event_name;
+                this.test_time = this.secondsToTime(response1.data.time_in_sec);
+                this.buttons = this.getButtons(response1.data.total_questions);
+                this.answers = this.getAnswers(response1.data.total_questions);
+                this.total_questions = response1.data.total_questions;
+                const response2 = await axios.get(`http://localhost:3000/user`);
+                this.user_id = response2.data.user_id;
+            }
+            catch (e){
+                console.log(e);
+            }
+        },
+        async showTestWindow(event){
+            this.event_id = event;
+            await this.init();
+            this.test_window = true;
         }
     },
     async created () {
-        // await this.getQuestionPaper();
-        try{
-            const response = await axios.get(`http://localhost:3000/questions/${this.event_id}`);
-            this.questions = response.data;
-            this.correct_answers = this.setAnswers(response.data);
-            const response1 = await axios.get(`http://localhost:3000/event/${this.event_id}`);
-            this.test_name = response1.data.event_name;
-            this.test_time = this.secondsToTime(response1.data.time_in_sec);
-            this.buttons = this.getButtons(response1.data.total_questions);
-            this.answers = this.getAnswers(response1.data.total_questions);
-            this.total_questions = response1.data.total_questions;
-            const response2 = await axios.get(`http://localhost:3000/user`);
-            this.user_id = response2.data.user_id;
-        }
-        catch (e){
-            console.log(e);
-        }
+        // try{
+        //     const response = await axios.get(`http://localhost:3000/questions/${this.event_id}`);
+        //     this.questions = response.data;
+        //     this.correct_answers = this.setAnswers(response.data);
+        //     const response1 = await axios.get(`http://localhost:3000/event/${this.event_id}`);
+        //     this.test_name = response1.data.event_name;
+        //     this.test_time = this.secondsToTime(response1.data.time_in_sec);
+        //     this.buttons = this.getButtons(response1.data.total_questions);
+        //     this.answers = this.getAnswers(response1.data.total_questions);
+        //     this.total_questions = response1.data.total_questions;
+        //     const response2 = await axios.get(`http://localhost:3000/user`);
+        //     this.user_id = response2.data.user_id;
+        // }
+        // catch (e){
+        //     console.log(e);
+        // }
     },
     watch: {
         time_up: {

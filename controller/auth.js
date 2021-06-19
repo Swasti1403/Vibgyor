@@ -32,7 +32,7 @@ exports.register = (req, res) => {
                 con.end();
                 return res.render('../register', { data : { error_message: 'Mobile number length should be 10'}});
             }
-            let query1 = `insert into Users (name,email,contact,password) values ("${name}","${email}","${contact}","${password}")`;
+            let query1 = `insert into Users (name,email,contact,password,profile_verified,mode) values ("${name}","${email}","${contact}","${password}","false","free")`;
             con.query(query1, (err, results) => {
                 if (err) {
                     console.log(err);
