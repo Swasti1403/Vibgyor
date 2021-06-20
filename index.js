@@ -13,10 +13,16 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.get("/", authController.isLoggedIn, function(req,res){
+
+app.get("/",function(req,res){
+    res.render(__dirname +"/front-page")
+});
+
+app.get("/dashboard", authController.isLoggedIn, function(req,res){
     if( req.user ){
-        res.render(__dirname +'/index', { data : {
-            user : req.user
+        res.render(__dirname +'/dashboard', { data : {
+            user : req.user,
+            heading : "Dashboard",
         }});
     }
     else {
@@ -79,10 +85,12 @@ app.get("/event/:eventId",function(req,res){
             return console.error('error: ' + err.message);
         }
         console.log("Event query executed");
-        event.event_id = results[0].event_id;
-        event.event_name = results[0].event_name;
-        event.total_questions = results[0].total_questions;
-        event.time_in_sec = results[0].time_in_sec;
+        if(results.length>0){
+            event.event_id = results[0].event_id;
+            event.event_name = results[0].event_name;
+            event.total_questions = results[0].total_questions;
+            event.time_in_sec = results[0].time_in_sec;
+        }
         await res.json(event);
         con.end();
     });
@@ -117,6 +125,7 @@ app.get("/past-performance", authController.isLoggedIn, function(req,res){
             res.render(__dirname +'/past-performance', { data : {
                 user : req.user,
                 attempts: attempts,
+                heading : "Past Performance",
             }});
             con.end();
         });
@@ -126,7 +135,7 @@ app.get("/past-performance", authController.isLoggedIn, function(req,res){
     }
 });
 
-app.get("/past-performance1/:attempt_id", authController.isLoggedIn, function(req,res){
+app.get("/past-performance-detailed/:attempt_id", authController.isLoggedIn, function(req,res){
     
     if( req.user ){
         let query = `select AN.attempt_id, E.event_name, Q.content, Q.answer as correct_answer, AN.answer as your_answer from Answers AN, Questions Q, Attempts ATT, Events E where AN.question_id = Q.question_id and ATT.event_id = E.event_id and ATT.attempt_id = AN.attempt_id and ATT.attempt_id = ${req.params.attempt_id} and ATT.user_id = ${req.user.user_id}`;
@@ -148,9 +157,10 @@ app.get("/past-performance1/:attempt_id", authController.isLoggedIn, function(re
                     your_answer: results[i].your_answer,
                 });
             }
-            res.render(__dirname +'/past-performance1', { data : {
+            res.render(__dirname +'/past-performance-detailed', { data : {
                 user : req.user,
                 details: details,
+                heading : "Past Performance Detailed",
             }});
             con.end();
         });
@@ -163,7 +173,8 @@ app.get("/past-performance1/:attempt_id", authController.isLoggedIn, function(re
 app.get("/all-packages", authController.isLoggedIn, function(req,res){
     if( req.user ){
         res.render(__dirname +'/all-packages', { data : {
-            user : req.user
+            user : req.user,
+            heading: "All Packages"
         }});
     }
     else {
@@ -171,14 +182,11 @@ app.get("/all-packages", authController.isLoggedIn, function(req,res){
     }
 });
 
-app.get("/test",function(req,res){
-    res.render(__dirname +"/test");
-});
-
 app.get("/practice", authController.isLoggedIn, function(req,res){
     if( req.user ){
         res.render(__dirname +'/practice', { data : {
-            user : req.user
+            user : req.user,
+            heading: "Practice Demo"
         }});
     }
     else {
@@ -204,10 +212,10 @@ app.get("/practice1", authController.isLoggedIn, function(req,res){
                     event_name:results[i].event_name,
                 });
             }
-            console.log(events);
             res.render(__dirname +'/practice1', { data : {
                 user : req.user,
                 events: events,
+                heading: "My Packages"
             }});
             con.end();
         });
@@ -218,14 +226,8 @@ app.get("/basic",function(req,res){
     res.render(__dirname +"/basic");
 });
 
-app.get("/imge",function(req,res){
-    res.render(__dirname +"/imge");
-});
 app.get("/layout-static",function(req,res){
     res.render(__dirname +"/layout-static");
-});
-app.get("/front-page",function(req,res){
-    res.render(__dirname +"/front-page")
 });
 
 app.get("/pay",function(req,res){
@@ -233,13 +235,21 @@ app.get("/pay",function(req,res){
 });
 
 app.get("/login",function(req,res){
-    res.render(__dirname +"/login", { data: {}});
+    res.render(__dirname +"/login", {
+        data: {
+            heading: "Log In"
+        },
+    });
 });
 
 app.post("/login", authController.login);
 
 app.get("/register",function(req,res){
-    res.render(__dirname +"/register", { data: {}});
+    res.render(__dirname +"/register", { 
+        data: {
+            heading: "Registration"
+        },
+    });
 });
 
 app.post("/register", authController.register);

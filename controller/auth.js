@@ -79,7 +79,7 @@ exports.login = (req, res) => {
                 }
 
                 res.cookie('Vibgyor', token, cookieOptions);
-                res.status(200).redirect('/');
+                res.status(200).redirect('/dashboard');
                 con.end();
             }
         });
