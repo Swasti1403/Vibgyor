@@ -119,5 +119,5 @@ exports.logout = async (req, res) => {
         ),
         httpOnly: true,
     });
-    res.status(200).redirect('/login');
+    res.status(200).redirect('/');
 }
