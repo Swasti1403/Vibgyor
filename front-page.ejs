@@ -24,7 +24,7 @@
     
     <body>
         <!-- Navigation-->
-        <nav class="sb-topnav fixed-top navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav sticky-top navbar navbar-expand navbar-dark bg-dark">
             <a class="navbar-brand" href="/">Vibgyor</a>
             <!-- Navbar Search-->
             <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></span>
@@ -32,7 +32,7 @@
             <ul class="navbar-nav ml-auto ml-md-0">
                 <% if(!data.user) { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">
+                        <a class="btn btn-success" href="/login">
                             Login
                         </a>
                     </li>
@@ -43,7 +43,7 @@
                     </li>
                 <% } %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">
+                    <a class="nav-link" href="#contact-us">
                         Contact
                     </a>
                 </li>
@@ -289,7 +289,7 @@
 
 
         <!-- Call to Action-->
-        <section class="call-to-action text-white text-center">
+        <section class="call-to-action text-white text-center" id="contact-us">
             <div class="overlay"></div>
             <div class="container" >
                 <!-- <div class="row"> -->
