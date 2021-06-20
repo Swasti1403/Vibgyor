@@ -14,8 +14,22 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 
-app.get("/",function(req,res){
-    res.render(__dirname +"/front-page")
+app.get("/", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +"/front-page", {
+            data : {
+                user : req.user,
+                heading : "Homepage"
+            }
+        })
+    }
+    else {
+        res.render(__dirname +"/front-page", {
+            data : {
+                heading : "Homepage"
+            }
+        })
+    }
 });
 
 app.get("/dashboard", authController.isLoggedIn, function(req,res){
