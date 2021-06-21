@@ -234,6 +234,9 @@ app.get("/practice1", authController.isLoggedIn, function(req,res){
             con.end();
         });
     }
+    else {
+        res.redirect('/login');
+    }
 });
 
 app.get("/basic",function(req,res){
@@ -269,6 +272,22 @@ app.get("/register",function(req,res){
 app.post("/register", authController.register);
 
 app.get("/logout", authController.logout);
+
+app.get("/change-password", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +"/change-password", {
+            data: {
+                user_id: req.user.user_id,
+                heading: "Change Password"
+            },
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.post("/change-password", authController.changePassword);
 
 app.get("/forgetPassword",function(req,res){
     res.render(__dirname +"/forget-password");

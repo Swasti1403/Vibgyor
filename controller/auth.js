@@ -121,3 +121,46 @@ exports.logout = async (req, res) => {
     });
     res.status(200).redirect('/');
 }
+
+exports.changePassword = async (req, res) => {
+    try {
+        const { user_id, old_password, new_password, confirm_password } = req.body;
+
+        const con = mysql.createConnection(db);
+
+        let query = `select * from Users where user_id = "${user_id}"`;
+        con.query(query, async (err, results) => {
+            if (err) {
+                console.log('error: ' + err.message);
+                con.end();
+                return res.status(500).render('../change-password', { data: { user_id: user_id, error_message: 'Something is wrong, please try again later'}});
+            }
+            else if ( old_password !== results[0].password ) {
+                con.end();
+                return res.render('../change-password', { data : { user_id: user_id, error_message: 'Wrong old password entered'}});
+            }
+            else if ( new_password !== confirm_password ) {
+                con.end();
+                return res.render('../change-password', { data : { user_id: user_id, error_message: 'Passwords do not match'}});
+            }
+            else if ( new_password.length < 6 ) {
+                con.end();
+                return res.render('../change-password', { data : { user_id: user_id, error_message: 'Password length should be atleast 6'}});
+            }
+            let query1 = `update Users set password = "${new_password}" where user_id = ${user_id}`;
+            con.query(query1, (err, results) => {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.render('../change-password', { data : { user_id: user_id, success_message: 'Password changed successfully'}});
+                }
+            });
+            con.end();
+        });
+    } catch (error) {
+        console.log(error);
+        con.end();
+        res.status(500).render('../change-password', { data: { user_id: user_id, error_message: 'Something is wrong, please try again later'}});
+    }
+}
