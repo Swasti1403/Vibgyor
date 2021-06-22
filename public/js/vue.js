@@ -181,7 +181,7 @@ const app = Vue.createApp({
             handler: function (val) {
                 if(val == true){
                     this.calculateScore();
-                    axios.post(`http://localhost:3000/testFinished`,{
+                    axios.post(`http://${host}:3000/testFinished`,{
                         user_id: this.user_id,
                         event_id: this.event_id,
                         total_questions: this.total_questions,
