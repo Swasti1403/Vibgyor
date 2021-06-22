@@ -40,6 +40,9 @@ const app = Vue.createApp({
                 this.current_question--;
             }
         },
+        finishTest(){
+            this.time_up = true;
+        },
         changeQuestion(questionNumber){
             console.log(questionNumber);
             this.current_question = questionNumber-1;
