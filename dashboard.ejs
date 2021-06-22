@@ -2,76 +2,33 @@
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
-        <div class="card">
+        <div class="card mt-4">
             <div class="card-header">
-              Details
+              Steps to proceed
             </div>
             <div class="card-body">
-                <h5 class="card-title">
-                    Name : <%=data.user.name%>
-                </h5>
-                <h5 class="card-title">
-                    User Id : <%=data.user.user_id%>
-                </h5>
-                <h5 class="card-title">
-                    Email : <%=data.user.email%>
-                </h5>
-                <h5 class="card-title">
-                    Contact : <%=data.user.contact%>
-                </h5>
-                <h5 class="card-title">
-                    Profile Verified : <%=data.user.profile_verified%>
-                </h5>
-                <h5 class="card-title">
-                    Mode : <%=data.user.mode%>
-                </h5>
-                <% if(data.user.profile_verified == "false"){ %>
-                    <p class="card-text">To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9999999999</p>
-                <% } %>
+                <p class="card-text">
+                    1. To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9999999999.
+                </p>
+                <p class="card-title">
+                    2. After verification, you can access free sample paper from <a href="/my-packages">My Packages</a> section.
+                </p>
+                <p class="card-title">
+                    3. Papers are divided according to the level of difficulty (Basic/Intermediate/Advance). Multiple attempts are allowed.
+                </p>
+                <p class="card-title">
+                    4. You can further buy packages according to your age groups and difficulty level.
+                </p>
+                <p class="card-title">
+                    5. Check <a href="/all-packages">All Packages</a> sections to buy the respective packages.
+                </p>
+                <p class="card-title">
+                    6. For more details, contact 9999999999.
+                </p>
             </div>
         </div>
-        <!-- <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Personal Details</li>
-        </ol> -->
-        <!-- <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Primary Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Warning Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Success Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">Danger Card</div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>    -->
     </div>
+    
     
 </main>
 <%- include("./views/footer") -%>

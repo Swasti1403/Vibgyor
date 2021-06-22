@@ -1,8 +1,6 @@
-body {
+/* body {
     background-color: #e9f5f8;
-}
-  
-
+} */
 
 .onQuestion{
     background-color: #518ef8;
@@ -11,10 +9,10 @@ body {
 .markedQuestion{
     background-color: rgb(51, 165, 6);
 }
+
 .timer {
     border-radius: 100%;
-    /* background-color: blueviolet; */
-    
+    /* background-color: blueviolet; */   
 }
 
 .start {

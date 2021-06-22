@@ -44,6 +44,18 @@ app.get("/dashboard", authController.isLoggedIn, function(req,res){
     }
 });
 
+app.get("/my-details", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        res.render(__dirname +'/my-details', { data : {
+            user : req.user,
+            heading : "My Details",
+        }});
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
 app.get("/user", authController.isLoggedIn, function(req, res){
     if( req.user ){
         res.json(req.user);
@@ -208,7 +220,7 @@ app.get("/practice", authController.isLoggedIn, function(req,res){
     }
 });
 
-app.get("/practice1", authController.isLoggedIn, function(req,res){
+app.get("/my-packages", authController.isLoggedIn, function(req,res){
     if( req.user ){
         let query = `select P.event_id, E.event_name from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
         let events = [];
@@ -226,7 +238,7 @@ app.get("/practice1", authController.isLoggedIn, function(req,res){
                     event_name:results[i].event_name,
                 });
             }
-            res.render(__dirname +'/practice1', { data : {
+            res.render(__dirname +'/my-packages', { data : {
                 user : req.user,
                 events: events,
                 heading: "My Packages"

@@ -24,7 +24,7 @@
     
     <body>
         <!-- Navigation-->
-        <nav class="sb-topnav sticky-top navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav sticky-top navbar navbar-expand navbar-light" style="background-color: #f7f7f7;">
             <a class="navbar-brand" href="/">Vibgyor</a>
             <!-- Navbar Search-->
             <span class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></span>
@@ -32,31 +32,31 @@
             <ul class="navbar-nav ml-auto ml-md-0">
                 <% if(!data.user) { %>
                     <li class="nav-item">
-                        <a class="btn btn-success" href="/login">
+                        <a class="btn btn-info" href="/login">
                             Login
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">
+                        <a class="btn btn-outline-info ml-2" href="/register">
                             Register
                         </a>
                     </li>
                 <% } %>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact-us">
+                    <a class="btn btn-outline-info ml-2" href="#contact-us">
                         Contact
                     </a>
                 </li>
                 <% if(data.user) { %>
                 <li class="nav-item">
-                    <a class="nav-link" href="/dashboard">
+                    <a class="btn btn-outline-info ml-2" href="/dashboard">
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="/change-password">Change Password</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/logout">Logout</a>
                     </div>
@@ -121,9 +121,9 @@
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
                             <div class="features-icons-icon d-flex"><img class="m-auto text-primary" src="../assets/img/worksheet.jpg " style="height:110%;width: 50%;" alt="worksheet"></div>
-                            <h3 class="mt-4"> Free Practice Sheets</h3>
+                            <h3 class="mt-4"> Free Sample Papers</h3>
                             <p class="lead mb-0">Get access to free worksheets!</p>
-                            <a href="/all-packages"><button class="btn btn-outline-danger btn-md mr-3 mt-2">Start Practicing</button></a>
+                            <a href="/register"><button class="btn btn-outline-danger btn-md mr-3 mt-2">Register Now</button></a>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -131,7 +131,26 @@
                             <div class="features-icons-icon d-flex"><img class="m-auto text-primary" src="../assets/img/trophy.jpg " style="height:110%;width: 50%;" alt="worksheet"></div>
                             <h3 class="mt-4">Competitions</h3>
                             <p class="lead mb-0" style="font-weight: lighter;" >Compete with the Best!</p>
-                            <a href="#"><button class="btn btn-outline-success btn-md mr-3 mt-2">Read More</button></a>
+                            <button type="button" class="btn btn-outline-success btn-md mr-3 mt-2" data-toggle="modal" data-target="#firstModal">Read More</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="firstModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body text-left">
+                                    Championship coming soon!!!
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -139,7 +158,26 @@
                             <div class="features-icons-icon d-flex"><img class="m-auto text-primary" src="../assets/img/faculty.jpg " style="height:110%;width: 50%;" alt="worksheet"></div>
                             <h3 class="mt-4">Buy Packages</h3>
                             <p class="lead mb-0" style="font-weight: lighter;">Get more practice sheets!</p>
-                            <a href="/basic"><button class="btn btn-outline-dark btn-md mr-3 mt-2">Learn More</button></a>
+                            <button type="button" class="btn btn-outline-dark btn-md mr-3 mt-2" data-toggle="modal" data-target="#secondModal">Learn More</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body text-left">
+                                    To buy more packages, register yourself with our site, get free sample paper and buy more.
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,7 +247,7 @@
                     <div class="card-body">
                       <h5 class="card-title">BASIC</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="/basic" class="btn btn-danger">Know More</a>
+                      <!-- <a href="/basic" class="btn btn-danger">Know More</a> -->
                     </div>
                 </div>
                 <div class="card col-sm-4 col-sm-4 feature-box" style="background: linear-gradient(45deg, #ffffff 10%, #fc98e6 90%);">
@@ -217,7 +255,7 @@
                     <div class="card-body">
                       <h5 class="card-title">INTERMEDIATE</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <button class="btn btn-success">Coming Soon</button>
+                      <!-- <button class="btn btn-success">Coming Soon</button> -->
                     </div>
                 </div>
                 <div class="card col-sm-4 col-sm-4 feature-box" style="background: linear-gradient(45deg, #ffffff 10%, #50ff4a 90%);" >
@@ -225,7 +263,7 @@
                     <div class="card-body">
                       <h5 class="card-title">ADVANCED</h5>
                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <button class="btn btn-info">Coming Soon</button>
+                      <!-- <button class="btn btn-info">Coming Soon</button> -->
                     </div>
                 </div>
             </div> 
@@ -319,7 +357,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 h-10 text-center">
-                        <p class="text-muted small mb-4 mb-lg-0 text-center"> Copyright © 2021 Vibgyor.All Rights Reserved.</p>
+                        <p class="text-muted small mb-4 mb-lg-0 text-center"> Copyright © 2021 Vibgyor. All Rights Reserved.</p>
                     </div>    
                 </div>
             </div>

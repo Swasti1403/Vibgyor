@@ -1,0 +1,35 @@
+<%- include("./views/header") -%>
+<main>
+    
+    <div class="container-fluid">
+        <div class="card mt-4">
+            <div class="card-header">
+              Details
+            </div>
+            <div class="card-body">
+                <p class="card-title">
+                    Name : <%=data.user.name%>
+                </p>
+                <p class="card-title">
+                    User Id : <%=data.user.user_id%>
+                </p>
+                <p class="card-title">
+                    Email : <%=data.user.email%>
+                </p>
+                <p class="card-title">
+                    Contact : <%=data.user.contact%>
+                </p>
+                <p class="card-title">
+                    Profile Verified : <%=data.user.profile_verified%>
+                </p>
+                <p class="card-title">
+                    Mode : <%=data.user.mode%>
+                </p>
+                <% if(data.user.profile_verified == "false"){ %>
+                    <p class="card-text">To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9999999999</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include("./views/footer") -%>
