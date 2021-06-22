@@ -1,3 +1,5 @@
+import { host } from "../../constants";
+
 const app = Vue.createApp({
     data() {
         return {
@@ -134,16 +136,16 @@ const app = Vue.createApp({
         },
         async init(){
             try{
-                const response = await axios.get(`http://localhost:3000/questions/${this.event_id}`);
+                const response = await axios.get(`http://${host}:3000/questions/${this.event_id}`);
                 this.questions = response.data;
                 this.correct_answers = this.setAnswers(response.data);
-                const response1 = await axios.get(`http://localhost:3000/event/${this.event_id}`);
+                const response1 = await axios.get(`http://${host}:3000/event/${this.event_id}`);
                 this.test_name = response1.data.event_name;
                 this.test_time = this.secondsToTime(response1.data.time_in_sec);
                 this.buttons = this.getButtons(response1.data.total_questions);
                 this.answers = this.getAnswers(response1.data.total_questions);
                 this.total_questions = response1.data.total_questions;
-                const response2 = await axios.get(`http://localhost:3000/user`);
+                const response2 = await axios.get(`http://${host}:3000/user`);
                 this.user_id = response2.data.user_id;
             }
             catch (e){
