@@ -99,6 +99,11 @@ exports.isLoggedIn = async (req, res, next) => {
             const con = mysql.createConnection(db);
             let query = `select * from Users where user_id = "${decoded.user_id}"`;
             con.query(query, async (err, results) => {
+                if (err) {
+                    console.log(err);
+                    con.end();
+                    return next();
+                }
                 req.user = results[0];
                 con.end();
                 return next();
