@@ -3,25 +3,45 @@
 <%if (data.error_message) { %>
     <h4 class="alert alert-danger mt-4"><%= data.error_message %></h4>
 <% } %>
-<form action="/login" method="POST">
+<form autocomplete="off" action="/login" method="POST">
     <div class="text-center pt-4">
         <h1><i class="fas fa-user"></i></h1>
         <h2>Login</h2>
         <hr style = "width: 50%; height:2px; background-color: #56baed;">
     </div>	
-    <input type="text" id="email" name="email" placeholder="Email" required>
-    <input type="password" id="password"  name="password" placeholder="Password" required>
+    <input type="email" autocomplete="off" id="email" name="email" placeholder="Email" required>
+    <input type="password" autocomplete="off" id="password"  name="password" placeholder="Password" required>
     <input class="mt-4" type="submit"  value="Log In">
 </form>
 
 <!-- Remind Passowrd -->
 <div id="formFooter">
     <div class="row">
-    <a class="underlineHover col-6" href="/forgetPassword">Forgot Password?</a>             
+    <a class="underlineHover col-6" href="/#" data-toggle="modal" data-target="#exampleModal">Forgot Password?</a>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body text-left">
+            To get your password, please contact 9999999999.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>             
     <a class="underlineHover col-6" href="/register">New User?</a>
 
     </div>
 </div>
+  
       
 <%- include("./views/auth-footer") -%>
 

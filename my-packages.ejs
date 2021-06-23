@@ -42,7 +42,7 @@
     
                         <span class="m-4">
                             <label for="answer"><h5 class="mt-2">Answer</h5></label>
-                            <input type="text" id="answer" v-model="answers[current_question]" v-on:keyup.enter="nextQuestion" style="width: 200px; border: 1px solid black;">
+                            <input type="text" autocomplete="off" id="answer" v-model="answers[current_question]" v-on:keyup.enter="nextQuestion" style="width: 200px; border: 1px solid black;">
                         </span>
                     </div>
                     
