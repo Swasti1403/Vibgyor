@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             test: true,
-            host: "http://localhost:3000",
+            host: "http://myvibgyor.com",
             test_window: false,
             user_id: '',
             test_name: 'Loading',
