@@ -57,6 +57,8 @@ app.get("/my-details", authController.isLoggedIn, function(req,res){
 });
 
 app.get("/user", authController.isLoggedIn, function(req, res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if( req.user ){
         res.json(req.user);
     }
@@ -66,6 +68,8 @@ app.get("/user", authController.isLoggedIn, function(req, res){
 })
 
 app.get("/questions/:eventId",function(req,res){ 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
     let questions = [];
 
@@ -101,6 +105,9 @@ app.get("/questions/:eventId",function(req,res){
 });
 
 app.get("/event/:eventId",function(req,res){ 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     let query = `select * from Events where event_id = "${req.params.eventId}"`;
     let event = {};
 
@@ -311,6 +318,9 @@ app.post("/forgetPassword",function(req,res){
 });
 
 app.post("/testFinished", function(req,res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     let my_date = new Date(new Date().getTime()+(360*60*1000));
     query_date = `${my_date.getFullYear()}-${my_date.getMonth()}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
     const { user_id, event_id, total_questions, attempted, correct_answers, wrong_answers, score, total_score, answers} = req.body;
