@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             test: true,
-            host: "localhost",
+            host: "http://localhost:3000",
             test_window: false,
             user_id: '',
             test_name: 'Loading',
@@ -138,31 +138,16 @@ const app = Vue.createApp({
         },
         async init(){
             try{
-                const response = await axios.get(`http://${this.host}:3000/questions/${this.event_id}`,
-                {
-                    Headers: {
-                        "Access-Control-Allow-Origin" : "*"
-                    }
-                });
+                const response = await axios.get(`${this.host}/questions/${this.event_id}`);
                 this.questions = response.data;
                 this.correct_answers = this.setAnswers(response.data);
-                const response1 = await axios.get(`http://${this.host}:3000/event/${this.event_id}`,
-                {
-                    Headers: {
-                        "Access-Control-Allow-Origin" : "*"
-                    }
-                });
+                const response1 = await axios.get(`${this.host}/event/${this.event_id}`);
                 this.test_name = response1.data.event_name;
                 this.test_time = this.secondsToTime(response1.data.time_in_sec);
                 this.buttons = this.getButtons(response1.data.total_questions);
                 this.answers = this.getAnswers(response1.data.total_questions);
                 this.total_questions = response1.data.total_questions;
-                const response2 = await axios.get(`http://${this.host}:3000/user`,
-                {
-                    Headers: {
-                        "Access-Control-Allow-Origin" : "*"
-                    }
-                });
+                const response2 = await axios.get(`${this.host}/user`);
                 this.user_id = response2.data.user_id;
             }
             catch (e){
@@ -176,29 +161,13 @@ const app = Vue.createApp({
         }
     },
     async created () {
-        // try{
-        //     const response = await axios.get(`http://localhost:3000/questions/${this.event_id}`);
-        //     this.questions = response.data;
-        //     this.correct_answers = this.setAnswers(response.data);
-        //     const response1 = await axios.get(`http://localhost:3000/event/${this.event_id}`);
-        //     this.test_name = response1.data.event_name;
-        //     this.test_time = this.secondsToTime(response1.data.time_in_sec);
-        //     this.buttons = this.getButtons(response1.data.total_questions);
-        //     this.answers = this.getAnswers(response1.data.total_questions);
-        //     this.total_questions = response1.data.total_questions;
-        //     const response2 = await axios.get(`http://localhost:3000/user`);
-        //     this.user_id = response2.data.user_id;
-        // }
-        // catch (e){
-        //     console.log(e);
-        // }
     },
     watch: {
         time_up: {
             handler: function (val) {
                 if(val == true){
                     this.calculateScore();
-                    axios.post(`http://${this.host}:3000/testFinished`,{
+                    axios.post(`${this.host}/testFinished`,{
                         user_id: this.user_id,
                         event_id: this.event_id,
                         total_questions: this.total_questions,
@@ -208,11 +177,6 @@ const app = Vue.createApp({
                         score: this.score,
                         total_score: this.total_questions,
                         answers: this.questionIdAnswersMapper(),
-                    },
-                    {
-                        Headers: {
-                            "Access-Control-Allow-Origin" : "*"
-                        }
                     });
                 }
             }
