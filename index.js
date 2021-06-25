@@ -335,7 +335,7 @@ app.post("/testFinished", function(req,res){
         console.log("Attempts set query executed");
         query1 = "insert into Answers (question_id, attempt_id, answer) values";
         for(let i=0;i<answers.length;i++){
-            query1+=`(${answers[i].question_id},${results.insertId},${answers[i].answer}),`;
+            query1+=`(${answers[i].question_id},${results.insertId},"${answers[i].answer}"),`;
         }
         query1 = query1.slice(0,query1.length-1);
         con.query(query1, async function (err, results) {
