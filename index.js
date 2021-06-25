@@ -322,7 +322,7 @@ app.post("/testFinished", function(req,res){
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
     let my_date = new Date(new Date().getTime()+(330*60*1000));
-    query_date = `${my_date.getFullYear()}-${my_date.getMonth()}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
+    query_date = `${my_date.getFullYear()}-${my_date.getMonth()+1}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
     const { user_id, event_id, total_questions, attempted, correct_answers, wrong_answers, score, total_score, answers} = req.body;
     let query = `insert into Attempts (user_id,event_id,total_score,your_score,total_questions,attempted,correct_answers,wrong_answers,date_attempted) values (${user_id},"${event_id}",${total_score},${score},${total_questions},${attempted},${correct_answers},${wrong_answers},"${query_date}")`;
 
