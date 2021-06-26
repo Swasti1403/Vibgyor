@@ -321,6 +321,10 @@ app.get("/exp",function(req,res){
     res.render(__dirname +"/exp");
 });
 
+app.get("/exp2",function(req,res){
+    res.render(__dirname +"/exp2");
+});
+
 app.post("/testFinished", function(req,res){
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
