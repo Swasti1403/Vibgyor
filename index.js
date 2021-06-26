@@ -310,6 +310,10 @@ app.post("/forgetPassword",function(req,res){
     res.send("Password changed");
 });
 
+app.get("/exp",function(req,res){
+    res.render(__dirname +"/exp");
+});
+
 app.post("/testFinished", function(req,res){
     let my_date = new Date(new Date().getTime()+(360*60*1000));
     query_date = `${my_date.getFullYear()}-${my_date.getMonth()}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
