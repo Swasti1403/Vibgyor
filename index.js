@@ -57,6 +57,8 @@ app.get("/my-details", authController.isLoggedIn, function(req,res){
 });
 
 app.get("/user", authController.isLoggedIn, function(req, res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if( req.user ){
         res.json(req.user);
     }
@@ -66,6 +68,8 @@ app.get("/user", authController.isLoggedIn, function(req, res){
 })
 
 app.get("/questions/:eventId",function(req,res){ 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     let query = 'select * from Questions where event_id = "' + req.params.eventId + '"';
     let questions = [];
 
@@ -101,6 +105,9 @@ app.get("/questions/:eventId",function(req,res){
 });
 
 app.get("/event/:eventId",function(req,res){ 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     let query = `select * from Events where event_id = "${req.params.eventId}"`;
     let event = {};
 
@@ -125,7 +132,7 @@ app.get("/event/:eventId",function(req,res){
 app.get("/past-performance", authController.isLoggedIn, function(req,res){
     
     if( req.user ){
-        let query = `select E.event_name, A.attempt_id, A.total_score, A.your_score, A.total_questions, A.attempted, A.correct_answers, A.wrong_answers, A.date_attempted from Attempts A, Events E where E.event_id = A.event_id and user_id = "${req.user.user_id}"`;
+        let query = `select E.event_name, A.attempt_id, A.total_score, A.your_score, A.total_questions, A.attempted, A.correct_answers, A.wrong_answers, A.date_attempted from Attempts A, Events E where E.event_id = A.event_id and user_id = "${req.user.user_id}" order by A.date_attempted desc`;
         let attempts = [];
 
         const con = mysql.createConnection(db);
@@ -315,8 +322,11 @@ app.get("/exp",function(req,res){
 });
 
 app.post("/testFinished", function(req,res){
-    let my_date = new Date(new Date().getTime()+(360*60*1000));
-    query_date = `${my_date.getFullYear()}-${my_date.getMonth()}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    let my_date = new Date(new Date().getTime()+(330*60*1000));
+    query_date = `${my_date.getFullYear()}-${my_date.getMonth()+1}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
     const { user_id, event_id, total_questions, attempted, correct_answers, wrong_answers, score, total_score, answers} = req.body;
     let query = `insert into Attempts (user_id,event_id,total_score,your_score,total_questions,attempted,correct_answers,wrong_answers,date_attempted) values (${user_id},"${event_id}",${total_score},${score},${total_questions},${attempted},${correct_answers},${wrong_answers},"${query_date}")`;
 
@@ -329,7 +339,7 @@ app.post("/testFinished", function(req,res){
         console.log("Attempts set query executed");
         query1 = "insert into Answers (question_id, attempt_id, answer) values";
         for(let i=0;i<answers.length;i++){
-            query1+=`(${answers[i].question_id},${results.insertId},${answers[i].answer}),`;
+            query1+=`(${answers[i].question_id},${results.insertId},"${answers[i].answer}"),`;
         }
         query1 = query1.slice(0,query1.length-1);
         con.query(query1, async function (err, results) {
