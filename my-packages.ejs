@@ -14,7 +14,7 @@
                     <h5 class="card-header">All Available Papers</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-primary m-2"><%= data.events[i].event_name%></button>
+                            <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%></button>
                         <% } %>
                     </div>
                   </div>
