@@ -132,7 +132,7 @@ app.get("/event/:eventId",function(req,res){
 app.get("/past-performance", authController.isLoggedIn, function(req,res){
     
     if( req.user ){
-        let query = `select E.event_name, A.attempt_id, A.total_score, A.your_score, A.total_questions, A.attempted, A.correct_answers, A.wrong_answers, A.date_attempted from Attempts A, Events E where E.event_id = A.event_id and user_id = "${req.user.user_id}" order by A.date_attempted desc`;
+        let query = `select E.event_name, A.attempt_id, A.total_score, A.your_score, A.total_questions, A.attempted, A.correct_answers, A.wrong_answers, A.date_attempted, A.time_taken from Attempts A, Events E where E.event_id = A.event_id and user_id = "${req.user.user_id}" order by A.date_attempted desc`;
         let attempts = [];
 
         const con = mysql.createConnection(db);
@@ -152,7 +152,8 @@ app.get("/past-performance", authController.isLoggedIn, function(req,res){
                     wrong_answers: results[i].wrong_answers,
                     total_score: results[i].total_score,
                     your_score: results[i].your_score,
-                    attempt_id: results[i].attempt_id
+                    attempt_id: results[i].attempt_id,
+                    time_taken: results[i].time_taken,
                 });
             }
             res.render(__dirname +'/past-performance', { data : {
@@ -331,8 +332,8 @@ app.post("/testFinished", function(req,res){
 
     let my_date = new Date(new Date().getTime()+(330*60*1000));
     query_date = `${my_date.getFullYear()}-${my_date.getMonth()+1}-${my_date.getDate()} ${my_date.getHours()}:${my_date.getMinutes()}:${my_date.getSeconds()}`;
-    const { user_id, event_id, total_questions, attempted, correct_answers, wrong_answers, score, total_score, answers} = req.body;
-    let query = `insert into Attempts (user_id,event_id,total_score,your_score,total_questions,attempted,correct_answers,wrong_answers,date_attempted) values (${user_id},"${event_id}",${total_score},${score},${total_questions},${attempted},${correct_answers},${wrong_answers},"${query_date}")`;
+    const { user_id, event_id, total_questions, attempted, correct_answers, wrong_answers, score, total_score, answers, time_taken} = req.body;
+    let query = `insert into Attempts (user_id,event_id,total_score,your_score,total_questions,attempted,correct_answers,wrong_answers,date_attempted,time_taken) values (${user_id},"${event_id}",${total_score},${score},${total_questions},${attempted},${correct_answers},${wrong_answers},"${query_date}",${time_taken})`;
 
     const con = mysql.createConnection(db);
 
