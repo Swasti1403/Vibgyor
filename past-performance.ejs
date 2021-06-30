@@ -18,6 +18,7 @@
                             <th>Wrong Answers</th>
                             <th>Total Score</th>
                             <th>Your Score</th>
+                            <th>Time Taken (in Sec)</th>
                             <th>More Details</th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                                 <td><%= data.attempts[i].wrong_answers %></td>
                                 <td><%= data.attempts[i].total_score %></td>
                                 <td><%= data.attempts[i].your_score %></td>
+                                <td><%= data.attempts[i].time_taken %></td>
                                 <td><button class="btn btn-outline-secondary" onclick="location.href='/past-performance-detailed/<%=data.attempts[i].attempt_id%>';">Details</button></td>
                             </tr>
                         <% } %>
