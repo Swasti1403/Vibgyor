@@ -14,9 +14,9 @@
                     <h5 class="card-header">All Available Papers</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <% if(data.events[i].status == 'open' && data.events[i].category == 'practice') { %>
+                            <% if(data.events[i].status == 'open' && data.events[i].category == 'vm0') { %>
                                 <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%></button>
-                            <% } else if(data.events[i].status == 'closed' && data.events[i].category == 'practice') { %>
+                            <% } else if(data.events[i].status == 'closed' && data.events[i].category == 'vm0') { %>
                                 <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%></button>
                             <% } %>
                         <% } %>
