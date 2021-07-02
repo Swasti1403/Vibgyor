@@ -230,7 +230,7 @@ app.get("/practice", authController.isLoggedIn, function(req,res){
 
 app.get("/my-packages", authController.isLoggedIn, function(req,res){
     if( req.user ){
-        let query = `select P.event_id, P.status, E.event_name from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
+        let query = `select P.event_id, P.status, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
         let events = [];
 
         const con = mysql.createConnection(db);
@@ -245,9 +245,43 @@ app.get("/my-packages", authController.isLoggedIn, function(req,res){
                     event_id:results[i].event_id,
                     event_name:results[i].event_name,
                     status:results[i].status,
+                    category:results[i].category,
                 });
             }
             res.render(__dirname +'/my-packages', { data : {
+                user : req.user,
+                events: events,
+                heading: "My Packages"
+            }});
+            con.end();
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.get("/vedic-marathon-0", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        let query = `select P.event_id, P.status, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
+        let events = [];
+
+        const con = mysql.createConnection(db);
+
+        con.query(query, async function (err, results) {
+            if (err) {
+                return console.error('error: ' + err.message);
+            }
+            console.log("Packages fetching query executed");
+            for(let i=0;i<results.length;i++){
+                events.push({
+                    event_id:results[i].event_id,
+                    event_name:results[i].event_name,
+                    status:results[i].status,
+                    category:results[i].category,
+                });
+            }
+            res.render(__dirname +'/vedic-marathon-0', { data : {
                 user : req.user,
                 events: events,
                 heading: "My Packages"
