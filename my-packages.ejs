@@ -9,15 +9,22 @@
             <% if(data.user.profile_verified == "false") {%>
                 <h4 class="alert alert-danger mt-4">Since your account is not verified, you cannot access this page. To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9910080191.</h4>
             <% } else { %>
-            <div v-if="!test_window">
+            <div v-if="!test_window && !paper_locked">
                 <div class="card">
                     <h5 class="card-header">All Available Papers</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%></button>
+                            <% if(data.events[i].status =='open') { %>
+                                <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%></button>
+                            <% } else { %>
+                                <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%></button>
+                            <% } %>
                         <% } %>
                     </div>
                   </div>
+            </div>
+            <div v-if="paper_locked">
+                <h4 class="alert alert-danger mt-4">This paper is locked for your user. Please try opening some other paper. <a style="color: darkblue;" href="/my-packages">Reload</a></h4>
             </div>
             <div v-if="test_window">
                 <div class="mt-4 text-center"><h1><strong>{{test_name}}</strong></h1></div>
@@ -39,7 +46,6 @@
                     </span>
                     <hr style="width:30%;margin: auto;background-color:green;">
                     <div class="text-center">
-    
                         <span class="m-4">
                             <label for="answer"><h5 class="mt-2">Answer</h5></label>
                             <input type="text" autocomplete="off" id="answer" v-model="answers[current_question]" v-on:keyup.enter="nextQuestion" style="width: 200px; border: 1px solid black;">
