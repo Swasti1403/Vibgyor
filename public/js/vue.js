@@ -28,6 +28,7 @@ const app = Vue.createApp({
             event_id: 'B000',
             current_question: 0,
             test_started: false,
+            paper_locked: false,
         }
     },
     methods: {
@@ -160,6 +161,9 @@ const app = Vue.createApp({
             this.event_id = event;
             await this.init();
             this.test_window = true;
+        },
+        showPaperLockedWindow(){
+            this.paper_locked = true;
         },
         calcTimeTaken(){
             return this.total_test_time-(this.min_left*60)-parseInt(this.sec_left);

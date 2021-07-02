@@ -230,7 +230,7 @@ app.get("/practice", authController.isLoggedIn, function(req,res){
 
 app.get("/my-packages", authController.isLoggedIn, function(req,res){
     if( req.user ){
-        let query = `select P.event_id, E.event_name from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
+        let query = `select P.event_id, P.status, E.event_name from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
         let events = [];
 
         const con = mysql.createConnection(db);
@@ -244,6 +244,7 @@ app.get("/my-packages", authController.isLoggedIn, function(req,res){
                 events.push({
                     event_id:results[i].event_id,
                     event_name:results[i].event_name,
+                    status:results[i].status,
                 });
             }
             res.render(__dirname +'/my-packages', { data : {
