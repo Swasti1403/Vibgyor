@@ -261,7 +261,7 @@ app.get("/my-packages", authController.isLoggedIn, function(req,res){
     }
 });
 
-app.get("/vedic-marathon-0", authController.isLoggedIn, function(req,res){
+app.get("/addition-marathon-0", authController.isLoggedIn, function(req,res){
     if( req.user ){
         let query = `select P.event_id, P.status, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
         let events = [];
@@ -281,10 +281,10 @@ app.get("/vedic-marathon-0", authController.isLoggedIn, function(req,res){
                     category:results[i].category,
                 });
             }
-            res.render(__dirname +'/vedic-marathon-0', { data : {
+            res.render(__dirname +'/addition-marathon-0', { data : {
                 user : req.user,
                 events: events,
-                heading: "My Packages"
+                heading: "Addition Marathon 0"
             }});
             con.end();
         });
