@@ -5,7 +5,7 @@ const { promisify } = require('util');
 
 exports.register = (req, res) => {
     try {
-        const { name, email, contact, password, confirm_password } = req.body;
+        const { name, email, contact, password, confirm_password, age, instructor } = req.body;
 
         const con = mysql.createConnection(db);
 
@@ -32,7 +32,7 @@ exports.register = (req, res) => {
                 con.end();
                 return res.render('../register', { data : { error_message: 'Mobile number length should be 10'}});
             }
-            let query1 = `insert into Users (name,email,contact,password,profile_verified,mode) values ("${name}","${email}","${contact}","${password}","false","free")`;
+            let query1 = `insert into Users (name,email,contact,password,profile_verified,mode,age,instructor) values ("${name}","${email}","${contact}","${password}","true","free",${age},"${instructor}")`;
             con.query(query1, (err, results) => {
                 if (err) {
                     console.log(err);
