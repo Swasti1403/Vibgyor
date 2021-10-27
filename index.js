@@ -381,9 +381,14 @@ app.post("/testFinished", function(req,res){
         for(let i=0;i<answers.length;i++){
             query1+=`(${answers[i].question_id},${results.insertId},"${answers[i].answer}"),`;
         }
+        // To be deleted
+        console.log('Kunal test before slicing- ' + query1);
         query1 = query1.slice(0,query1.length-1);
+        // To be deleted
+        console.log('Kunal test after slicing- ' + query1);
         con.query(query1, async function (err, results) {
             if (err) {
+                console.log("Errored for query " + query1);
                 return console.error('error: ' + err.message);
             }
         });
