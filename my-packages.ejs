@@ -9,15 +9,19 @@
             <% if(data.user.profile_verified == "false") {%>
                 <h4 class="alert alert-danger mt-4">Since your account is not verified, you cannot access this page. To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9910080191.</h4>
             <% } else { %>
-            <div v-if="!test_window && !paper_locked">
+            <div v-if="!test_window && !paper_locked && !attempts_complete">
                 <div class="card">
                     <h5 class="card-header">All Available Papers</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <% if(data.events[i].status == 'open' && data.events[i].category == 'practice') { %>
-                                <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%></button>
-                            <% } else if(data.events[i].status == 'closed' && data.events[i].category == 'practice') { %>
-                                <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%></button>
+                            <% if(data.events[i].category == 'practice') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
                             <% } %>
                         <% } %>
                     </div>
@@ -25,6 +29,9 @@
             </div>
             <div v-if="paper_locked">
                 <h4 class="alert alert-danger mt-4">This paper is locked for your account. Please try attempting some other paper. <a style="color: darkblue;" href="/my-packages">Go Back</a></h4>
+            </div>
+            <div v-if="attempts_complete">
+                <h4 class="alert alert-danger mt-4">Sorry! You have exhausted all your attempts for this paper. Please try attempting some other paper. <a style="color: darkblue;" href="/my-packages">Go Back</a></h4>
             </div>
             <div v-if="test_window">
                 <div class="mt-4 text-center"><h1><strong>{{test_name}}</strong></h1></div>

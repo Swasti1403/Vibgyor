@@ -29,6 +29,7 @@ const app = Vue.createApp({
             current_question: 0,
             test_started: false,
             paper_locked: false,
+            attempts_complete: false,
         }
     },
     methods: {
@@ -164,6 +165,9 @@ const app = Vue.createApp({
         },
         showPaperLockedWindow(){
             this.paper_locked = true;
+        },
+        showAttemptsCompleteWindow(){
+            this.attempts_complete = true;
         },
         calcTimeTaken(){
             return this.total_test_time-(this.min_left*60)-parseInt(this.sec_left);
