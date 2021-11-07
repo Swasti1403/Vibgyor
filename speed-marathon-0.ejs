@@ -1,0 +1,182 @@
+<%- include("./views/header") -%>
+<!-- Core theme CSS -->
+<link href="css/styles5.css" rel="stylesheet" />
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<body>
+    <div class="container-fluid db">
+        <div id="test"  style="margin-top: 3%;">
+            <% if(data.user.profile_verified == "false") {%>
+                <h4 class="alert alert-danger mt-4">Since your account is not verified, you cannot access this page. To verify your account, please Whatsapp a photo of Aadhaar-card of the student on 9910080191.</h4>
+            <% } else { %>
+            <div v-if="!test_window && !paper_locked && !attempts_complete">
+                <div class="card">
+                    <h5 class="card-header">Pre Abacus</h5>
+                    <div class="card-body">
+                        <% for(let i=0;i<data.events.length;i++) { %>
+                            <% if(data.events[i].category == 'pa0') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <h5 class="card-header">Addition Marathon</h5>
+                    <div class="card-body">
+                        <% for(let i=0;i<data.events.length;i++) { %>
+                            <% if(data.events[i].category == 'am1') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <h5 class="card-header">Multiplication Marathon</h5>
+                    <div class="card-body">
+                        <% for(let i=0;i<data.events.length;i++) { %>
+                            <% if(data.events[i].category == 'mm0') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <h5 class="card-header">Vedic - Basic</h5>
+                    <div class="card-body">
+                        <% for(let i=0;i<data.events.length;i++) { %>
+                            <% if(data.events[i].category == 'TO BE DECIDED') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <h5 class="card-header">Vedic - Intermediate</h5>
+                    <div class="card-body">
+                        <% for(let i=0;i<data.events.length;i++) { %>
+                            <% if(data.events[i].category == 'TO BE DECIDED') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="card">
+                    <h5 class="card-header">Vedic - Advance</h5>
+                    <div class="card-body">
+                        <% for(let i=0;i<data.events.length;i++) { %>
+                            <% if(data.events[i].category == 'TO BE DECIDED') {%>
+                                <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
+                                    <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } else if(data.events[i].status == 'closed') { %>
+                                    <button @click="showPaperLockedWindow()" class="btn btn-danger m-3"><%= data.events[i].event_name%> (Locked)</button>
+                                <% } else if(data.events[i].attempted == data.events[i].attempts) {%>
+                                    <button @click="showAttemptsCompleteWindow()" class="btn btn-warning m-3"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div v-if="paper_locked">
+                <h4 class="alert alert-danger mt-4">This paper is locked for your account. Please try attempting some other paper. <a style="color: darkblue;" href="/my-packages">Go Back</a></h4>
+            </div>
+            <div v-if="attempts_complete">
+                <h4 class="alert alert-danger mt-4">Sorry! You have exhausted all your attempts for this paper. Please try attempting some other paper. <a style="color: darkblue;" href="/my-packages">Go Back</a></h4>
+            </div>
+            <div v-if="test_window">
+                <div class="mt-4 text-center"><h1><strong>{{test_name}}</strong></h1></div>
+                <div class="row" style="margin-bottom: 2%;">
+                    <div class="col-6 mt-4 text-center mt-5"><h5><strong>Total Questions : {{total_questions}}</strong></h5></div>
+                    <div class="col-6 mt-4 text-center mt-5" ><h5><strong>Total Time : {{test_time}}</strong></h5></div> 
+                </div>
+                <div class="text-center"v-if="!time_up">
+                    <button class="timer btn btn-light btn-lg mb-1"><strong>{{min_left}}:{{sec_left}}</strong> </button>
+                </div>
+                
+                <div class="text-center" style="margin-top: 1%;" v-if="!test_started">
+                    <button class="start btn mt-2" @click="startTest "><strong>Start Test</strong> </button>
+                </div>
+                <div class="text-center " v-if="test_started && !time_up">
+                    <span class="row ml-5 mr-5" style="background-color: rgb(244, 246, 247);margin-left: 4%;margin-right: 4%;">
+                    <div class="col-lg-6 text-lg-right text-sm-center" style="font-size: medium;font-weight: bold;margin-bottom: 1%;margin-top: 1%;"><h5 style="font-weight:600; white-space:pre" class="wrap">Question No.{{current_question+1}}:</h5></div>
+                    <div class="col-lg-6 text-lg-left text-sm-center" style="font-size: medium;font-weight: bold;margin-bottom: 1%;margin-top: 1%;"><h5 style="font-weight:500; white-space:pre; font-family:monospace;" class="wrap">{{questions[current_question].question}}</h5></div>
+                    </span>
+                    <hr style="width:30%;margin: auto;background-color:green;">
+                    <div class="text-center">
+                        <span class="m-4">
+                            <label for="answer"><h5 class="mt-2">Answer</h5></label>
+                            <input type="text" autocomplete="off" id="answer" v-model="answers[current_question]" v-on:keyup.enter="nextQuestion" style="width: 200px; border: 1px solid black;">
+                        </span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-6"><button class="btn mb-4 mt-3" style="font-size: 13px;background-color: #4885ed;color: white;" @click="prevQuestion">Previous Question</button></div>
+                        <div class="col-lg-6"><button class="btn btn-success mb-4 mt-3" style="font-size: 13px;" @click="nextQuestion">Next Question</button></div>
+                    </div>
+                    <div>
+                        <button class="btn btn-circle btn-sm"v-bind:class="{ 'onQuestion': current_question+1==button, 'markedQuestion': answers[button-1] != null  }" v-for="button in buttons" @click="changeQuestion(button)">{{button}}</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12"><button class="btn btn-danger mb-4 mt-3" style="font-size: 13px;" @click="finishTest">Finish Test</button></div>
+
+                    </div>
+                    
+                </div>
+                <div class="text-center">
+                    <span v-if="time_up">
+                        <h5 class="mt-5">Time Over! Thanks for attempting out test ..<i class="fa fa-thumbs-up mr-3" aria-hidden="true"></i></h5>
+                        <h4 class="mt-5">Test : {{test_name}}</h4>
+                        <h5 class="mt-5">Total Questions : {{total_questions}}</h5>
+                        <h5 class="mt-5">Attempted : {{attempted}}</h5>
+                        <h5 class="mt-5">Correct Questions : {{correct_answers}}</h5>
+                        <h5 class="mt-5">Wrong Questions : {{wrong_answers}}</h5>
+                        <h5 class="mt-5">Score : {{score}}/{{total_questions}}</h5>
+    
+                    </span>
+                </div>
+    
+            </div>
+  
+            <% } %>
+            
+        </div>
+    </div> 
+
+</body>
+<%- include("./views/footer") -%>

@@ -230,7 +230,7 @@ app.get("/practice", authController.isLoggedIn, function(req,res){
 
 app.get("/my-packages", authController.isLoggedIn, function(req,res){
     if( req.user ){
-        let query = `select P.event_id, P.status, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
+        let query = `select P.event_id, P.status, P.attempts, P.attempted, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
         let events = [];
 
         const con = mysql.createConnection(db);
@@ -246,6 +246,8 @@ app.get("/my-packages", authController.isLoggedIn, function(req,res){
                     event_name:results[i].event_name,
                     status:results[i].status,
                     category:results[i].category,
+                    attempts:results[i].attempts,
+                    attempted:results[i].attempted,
                 });
             }
             res.render(__dirname +'/my-packages', { data : {
@@ -285,6 +287,41 @@ app.get("/addition-marathon-0", authController.isLoggedIn, function(req,res){
                 user : req.user,
                 events: events,
                 heading: "Addition Marathon 0"
+            }});
+            con.end();
+        });
+    }
+    else {
+        res.redirect('/login');
+    }
+});
+
+app.get("/speed-marathon-0", authController.isLoggedIn, function(req,res){
+    if( req.user ){
+        let query = `select P.event_id, P.status, P.attempts, P.attempted, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
+        let events = [];
+
+        const con = mysql.createConnection(db);
+
+        con.query(query, async function (err, results) {
+            if (err) {
+                return console.error('error: ' + err.message);
+            }
+            console.log("Packages fetching query executed");
+            for(let i=0;i<results.length;i++){
+                events.push({
+                    event_id:results[i].event_id,
+                    event_name:results[i].event_name,
+                    status:results[i].status,
+                    category:results[i].category,
+                    attempts:results[i].attempts,
+                    attempted:results[i].attempted,
+                });
+            }
+            res.render(__dirname +'/speed-marathon-0', { data : {
+                user : req.user,
+                events: events,
+                heading: "Speed Marathon"
             }});
             con.end();
         });
@@ -389,7 +426,14 @@ app.post("/testFinished", function(req,res){
         con.query(query1, async function (err, results) {
             if (err) {
                 console.log("Errored for query " + query1);
-                return console.error('error: ' + err.message);
+                console.error('error: ' + err.message);
+            }
+        });
+        query2 = `update Packages set attempted = attempted + 1 where user_id = ${user_id} and event_id = "${event_id}"`;
+        con.query(query2, async function (err, results) {
+            if (err) {
+                console.log("Error while increasing attempts");
+                console.error('error: ' + err.message);
             }
         });
         con.end();
