@@ -65,7 +65,7 @@
                     <h5 class="card-header">Vedic - Basic</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <% if(data.events[i].category == 'TO BE DECIDED') {%>
+                            <% if(data.events[i].category == 'vb0') {%>
                                 <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
                                     <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
                                 <% } else if(data.events[i].status == 'closed') { %>
@@ -82,7 +82,7 @@
                     <h5 class="card-header">Vedic - Intermediate</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <% if(data.events[i].category == 'TO BE DECIDED') {%>
+                            <% if(data.events[i].category == 'vi0') {%>
                                 <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
                                     <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
                                 <% } else if(data.events[i].status == 'closed') { %>
@@ -94,13 +94,12 @@
                         <% } %>
                     </div>
                 </div>
-                <br>
                 <br>
                 <div class="card">
                     <h5 class="card-header">Vedic - Advance</h5>
                     <div class="card-body">
                         <% for(let i=0;i<data.events.length;i++) { %>
-                            <% if(data.events[i].category == 'TO BE DECIDED') {%>
+                            <% if(data.events[i].category == 'va0') {%>
                                 <% if(data.events[i].status == 'open' && data.events[i].attempted != data.events[i].attempts) { %>
                                     <button @click="showTestWindow('<%= data.events[i].event_id %>')" class="btn btn-light m-3" style="background-color: #c1e1ec;"><%= data.events[i].event_name%> (<%= data.events[i].attempted%>/<%= data.events[i].attempts%> Attempts)</button>
                                 <% } else if(data.events[i].status == 'closed') { %>
@@ -112,6 +111,7 @@
                         <% } %>
                     </div>
                 </div>
+                <br>
             </div>
             <div v-if="paper_locked">
                 <h4 class="alert alert-danger mt-4">This paper is locked for your account. Please try attempting some other paper. <a style="color: darkblue;" href="/my-packages">Go Back</a></h4>
