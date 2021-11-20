@@ -296,7 +296,7 @@ app.get("/addition-marathon-0", authController.isLoggedIn, function(req,res){
     }
 });
 
-app.get("/speed-marathon-0", authController.isLoggedIn, function(req,res){
+app.get("/speed-championship-0", authController.isLoggedIn, function(req,res){
     if( req.user ){
         let query = `select P.event_id, P.status, P.attempts, P.attempted, E.event_name, E.category from Packages P, Events E where P.event_id = E.event_id and user_id = ${req.user.user_id}`;
         let events = [];
@@ -318,10 +318,10 @@ app.get("/speed-marathon-0", authController.isLoggedIn, function(req,res){
                     attempted:results[i].attempted,
                 });
             }
-            res.render(__dirname +'/speed-marathon-0', { data : {
+            res.render(__dirname +'/speed-championship-0', { data : {
                 user : req.user,
                 events: events,
-                heading: "Speed Marathon"
+                heading: "Speed Championship"
             }});
             con.end();
         });
