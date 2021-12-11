@@ -126,21 +126,21 @@
                     <div class="col-lg-4">
                         <div class="features-icons-item mx-auto mb-0 mb-lg-3">
                             <div class="features-icons-icon d-flex"><img class="m-auto text-primary" src="../assets/img/faculty.jpg " style="height:110%;width: 50%;" alt="worksheet"></div>
-                            <h3 class="mt-4">Buy Packages</h3>
-                            <p class="lead mb-0" style="font-weight: lighter;">Get more practice sheets!</p>
-                            <button type="button" class="btn btn-outline-dark btn-md mr-3 mt-2" data-toggle="modal" data-target="#secondModal">Learn More</button>
+                            <h3 class="mt-4">Results</h3>
+                            <p class="lead mb-0" style="font-weight: lighter;">Check your result here!</p>
+                            <button type="button" class="btn btn-outline-dark btn-md mr-3 mt-2" data-toggle="modal" data-target="#secondModal">Click Here</button>
                             <!-- Modal -->
                             <div class="modal fade" id="secondModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Results</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                     </div>
                                     <div class="modal-body text-left">
-                                    To buy more packages, register yourself with our site, get free sample paper and buy more.
+                                        <button class="btn btn-primary" onclick="document.location='/download/speedChampionship.xlsx'">Speed Championship</button>
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -336,11 +336,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             $(window).on('load', function() {
                 $('#firstModal').modal('show');
             });
-        </script>
+        </script> -->
         
     </body>
 </html>

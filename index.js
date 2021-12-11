@@ -439,7 +439,12 @@ app.post("/testFinished", function(req,res){
         con.end();
     });
     res.send({});
-})
+});
+
+app.get('/download/:file', function(req, res){
+    const file = `${__dirname}/results/${req.params.file}`;
+    res.download(file);
+});
 
 app.listen(process.env.PORT || 3000,function(){
     console.log("server is running on port 3000");
